@@ -26,10 +26,10 @@ public class UsuariosController {
     }
 
     @PostMapping
-    public void insert (@RequestBody UsuariosDTO dto){
+    public void insert (@RequestBody UsuariosDTO dtouser){
         ModelMapper m=new ModelMapper();
-        Usuarios u=m.map(dto, Usuarios.class);
-        uS.insertar(u);
+        Usuarios u = m.map(dtouser, Usuarios.class);
+        uS.insertUser(u);
     }
 
     @GetMapping("/{id}")

@@ -7,8 +7,10 @@ import pe.edu.upc.coopnovel.repositories.IUsuariosRepository;
 import pe.edu.upc.coopnovel.serviceinterfaces.IUsuariosService;
 
 import java.util.List;
+
 @Service
 public class UsuariosServiceImplement implements IUsuariosService {
+
     @Autowired
     private IUsuariosRepository uR;
 
@@ -18,7 +20,7 @@ public class UsuariosServiceImplement implements IUsuariosService {
     }
 
     @Override
-    public void insertar (Usuarios usuarios) {
+    public void insertUser (Usuarios usuarios) {
         uR.save(usuarios);
     }
 

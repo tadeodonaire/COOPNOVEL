@@ -41,44 +41,12 @@ public class Usuarios {
         this.idUsuario = idUsuario;
     }
 
-    public Boolean getUsEnable() {
-        return usEnable;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setUsEnable(Boolean usEnable) {
-        this.usEnable = usEnable;
-    }
-
-    public String getUsContrasena() {
-        return usContrasena;
-    }
-
-    public void setUsContrasena(String usContrasena) {
-        this.usContrasena = usContrasena;
-    }
-
-    public String getUsCorreo() {
-        return usCorreo;
-    }
-
-    public void setUsCorreo(String usCorreo) {
-        this.usCorreo = usCorreo;
-    }
-
-    public LocalDate getUsFecNacimiento() {
-        return usFecNacimiento;
-    }
-
-    public void setUsFecNacimiento(LocalDate usFecNacimiento) {
-        this.usFecNacimiento = usFecNacimiento;
-    }
-
-    public String getUsApellido() {
-        return usApellido;
-    }
-
-    public void setUsApellido(String usApellido) {
-        this.usApellido = usApellido;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getUsNombre() {
@@ -89,11 +57,43 @@ public class Usuarios {
         this.usNombre = usNombre;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
+    public String getUsApellido() {
+        return usApellido;
     }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setUsApellido(String usApellido) {
+        this.usApellido = usApellido;
+    }
+
+    public LocalDate getUsFecNacimiento() {
+        return usFecNacimiento;
+    }
+
+    public void setUsFecNacimiento(LocalDate usFecNacimiento) {
+        this.usFecNacimiento = usFecNacimiento;
+    }
+
+    public String getUsCorreo() {
+        return usCorreo;
+    }
+
+    public void setUsCorreo(String usCorreo) {
+        this.usCorreo = usCorreo;
+    }
+
+    public String getUsContrasena() {
+        return usContrasena;
+    }
+
+    public void setUsContrasena(String usContrasena) {
+        this.usContrasena = usContrasena;
+    }
+
+    public Boolean getUsEnable() {
+        return usEnable;
+    }
+
+    public void setUsEnable(Boolean usEnable) {
+        this.usEnable = usEnable;
     }
 }
