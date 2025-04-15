@@ -2,10 +2,9 @@ package pe.edu.upc.coopnovel.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.coopnovel.dtos.UsuariosDTO;
+import pe.edu.upc.coopnovel.entities.Usuarios;
 import pe.edu.upc.coopnovel.serviceinterfaces.IUsuariosService;
 
 import java.util.List;
@@ -24,6 +23,32 @@ public class UsuariosController {
             ModelMapper m=new ModelMapper();
             return m.map(x, UsuariosDTO.class);
         }).collect(Collectors.toList());
+    }
+
+    @PostMapping
+    public void insert (@RequestBody UsuariosDTO dto){
+        ModelMapper m=new ModelMapper();
+        Usuarios u=m.map(dto, Usuarios.class);
+        uS.insertar(u);
+    }
+
+    @GetMapping("/{id}")
+    public UsuariosDTO listarId(@PathVariable ("id") Integer id){
+        ModelMapper m=new ModelMapper();
+        UsuariosDTO dto=m.map(uS.listId(id), UsuariosDTO.class);
+        return dto;
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable ("id") Integer id){
+        uS.delete(id);
+    }
+
+    @PutMapping
+    public void modificar(@RequestBody UsuariosDTO dto){
+        ModelMapper m=new ModelMapper();
+        Usuarios u=m.map(dto, Usuarios.class);
+        uS.update(u);
     }
 
 }
