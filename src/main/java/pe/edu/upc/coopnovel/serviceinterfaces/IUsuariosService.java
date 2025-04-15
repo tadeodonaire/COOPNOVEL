@@ -6,4 +6,8 @@ import java.util.List;
 
 public interface IUsuariosService {
     public List<Usuarios> list();
+    public void insertUser (Usuarios usuarios);
+    public Usuarios listId (int id);
+    public void delete (int id);
+    public void update (Usuarios usuarios);
 }
