@@ -8,6 +8,7 @@ public class Novelas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private int idNovela;
 
     @Column(name = "novTitulo", length = 30, nullable = false)
@@ -26,13 +27,10 @@ public class Novelas {
     public Novelas() {
     }
 
+
     public Novelas(int idNovela, String novTitulo, String novResumen, String novGenero, Proyectos proyectos) {
         this.idNovela = idNovela;
-        this.novTitulo = novTitulo;
-        this.novResumen = novResumen;
-        this.novGenero = novGenero;
-        this.proyectos = proyectos;
-    }
+
 
     public int getIdNovela() {
         return idNovela;
@@ -40,7 +38,7 @@ public class Novelas {
 
     public void setIdNovela(int idNovela) {
         this.idNovela = idNovela;
-    }
+
 
     public String getNovTitulo() {
         return novTitulo;
