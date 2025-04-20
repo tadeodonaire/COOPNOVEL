@@ -1,32 +1,16 @@
-package pe.edu.upc.coopnovel.entities;
+package pe.edu.upc.coopnovel.dtos;
 
-import jakarta.persistence.*;
+import pe.edu.upc.coopnovel.entities.Usuarios;
 
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "Descarga")
-public class Descarga {
+public class DescargasDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idDescarga;
 
-    @Column(name = "hisFecha", nullable = false)
     private LocalDate hisFecha;
 
-    @ManyToOne
-    @JoinColumn(name = "usuario_Id")
     private Usuarios user;
-
-    public Descarga() {
-    }
-
-    public Descarga(int idDescarga, LocalDate hisFecha, Usuarios user) {
-        this.idDescarga = idDescarga;
-        this.hisFecha = hisFecha;
-        this.user = user;
-    }
 
     public int getIdDescarga() {
         return idDescarga;
