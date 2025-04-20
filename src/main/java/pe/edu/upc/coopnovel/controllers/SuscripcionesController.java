@@ -28,8 +28,8 @@ public class SuscripcionesController {
     @PostMapping
     public void insert(@RequestBody SuscripcionesDTO dto){
         ModelMapper m = new ModelMapper();
-        Suscripciones se = m.map(dto, Suscripciones.class);
-        sS.insert(se);
+        Suscripciones s = m.map(dto, Suscripciones.class);
+        sS.insert(s);
     }
     @GetMapping("/{id}")
     public SuscripcionesDTO buscarId(@PathVariable("id") int id){
@@ -41,8 +41,8 @@ public class SuscripcionesController {
     @PutMapping
     public void modificar(@RequestBody SuscripcionesDTO dto){
         ModelMapper m = new ModelMapper();
-        Suscripciones se = m.map(dto, Suscripciones.class);
-        sS.update(se);
+        Suscripciones s = m.map(dto, Suscripciones.class);
+        sS.update(s);
     }
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") int id){

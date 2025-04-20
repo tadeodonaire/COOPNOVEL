@@ -29,15 +29,15 @@ public class DescargaController {
     @PostMapping
     public void insertar(@RequestBody DescargaDTO dto) {
         ModelMapper m = new ModelMapper();
-        Descarga a = m.map(dto, Descarga.class);
-        dS.insert(a);
+        Descarga d = m.map(dto, Descarga.class);
+        dS.insert(d);
     }
 
     @PutMapping
     public void modificar(@RequestBody DescargaDTO dto) {
         ModelMapper m = new ModelMapper();
-        Descarga a = m.map(dto, Descarga.class);
-        dS.update(a);
+        Descarga d = m.map(dto, Descarga.class);
+        dS.update(d);
     }
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") int id) {

@@ -18,10 +18,10 @@ public class DescargaServiceImplement implements IDescargaService {
     public List<Descarga> list() { return dR.findAll(); }
 
     @Override
-    public void insert(Descarga s) { dR.save(s); }
+    public void insert(Descarga d) { dR.save(d); }
 
     @Override
-    public void update(Descarga s) { dR.save(s); }
+    public void update(Descarga d) { dR.save(d); }
 
     @Override
     public void delete(int id) { dR.deleteById(id); }
