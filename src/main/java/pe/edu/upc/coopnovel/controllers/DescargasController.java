@@ -3,40 +3,40 @@ package pe.edu.upc.coopnovel.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.coopnovel.dtos.DescargaDTO;
-import pe.edu.upc.coopnovel.entities.Descarga;
-import pe.edu.upc.coopnovel.serviceinterfaces.IDescargaService;
+import pe.edu.upc.coopnovel.dtos.DescargasDTO;
+import pe.edu.upc.coopnovel.entities.Descargas;
+import pe.edu.upc.coopnovel.serviceinterfaces.IDescargasService;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/descargas")
-public class DescargaController {
+public class DescargasController {
 
     @Autowired
-    private IDescargaService dS;
+    private IDescargasService dS;
 
     @GetMapping
-    public List<DescargaDTO> listar() {
+    public List<DescargasDTO> listar() {
 
         return dS.list().stream().map(x -> {
             ModelMapper m = new ModelMapper();
-            return m.map(x, DescargaDTO.class);
+            return m.map(x, DescargasDTO.class);
         }).collect(Collectors.toList());
     }
 
     @PostMapping
-    public void insertar(@RequestBody DescargaDTO dto) {
+    public void insertar(@RequestBody DescargasDTO dto) {
         ModelMapper m = new ModelMapper();
-        Descarga d = m.map(dto, Descarga.class);
+        Descargas d = m.map(dto, Descargas.class);
         dS.insert(d);
     }
 
     @PutMapping
-    public void modificar(@RequestBody DescargaDTO dto) {
+    public void modificar(@RequestBody DescargasDTO dto) {
         ModelMapper m = new ModelMapper();
-        Descarga d = m.map(dto, Descarga.class);
+        Descargas d = m.map(dto, Descargas.class);
         dS.update(d);
     }
     @DeleteMapping("/{id}")
@@ -45,10 +45,10 @@ public class DescargaController {
     }
 
     @GetMapping("/nombres")
-    public List<DescargaDTO> buscarPorNombre(@RequestParam String nombre) {
+    public List<DescargasDTO> buscarPorNombre(@RequestParam String nombre) {
         return dS.search(nombre).stream().map(y->{
             ModelMapper m = new ModelMapper();
-            return m.map(y,DescargaDTO.class);
+            return m.map(y, DescargasDTO.class);
         }).collect(Collectors.toList());
     }
 }

@@ -4,7 +4,7 @@ import pe.edu.upc.coopnovel.entities.Proyectos;
 
 public class NovelasDTO {
 
-    private int idProyecto;
+    private int idNovelas;
 
     private String novTitulo;
 
@@ -14,12 +14,12 @@ public class NovelasDTO {
 
     private Proyectos proyectos;
 
-    public int getIdProyecto() {
-        return idProyecto;
+    public int getIdNovelas() {
+        return idNovelas;
     }
 
-    public void setIdProyecto(int idProyecto) {
-        this.idProyecto = idProyecto;
+    public void setIdNovelas(int idNovelas) {
+        this.idNovelas = idNovelas;
     }
 
     public String getNovTitulo() {
