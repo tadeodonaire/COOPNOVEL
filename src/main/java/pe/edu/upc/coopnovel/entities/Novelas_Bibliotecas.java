@@ -1,10 +1,11 @@
 package pe.edu.upc.coopnovel.entities;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.JoinColumn;
-
+import jakarta.persistence.*;
+@Entity
+@Table(name = "Novelas_Bibliotecas")
 public class Novelas_Bibliotecas {
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idnovelaBiblioteca;
 
@@ -23,9 +24,7 @@ public class Novelas_Bibliotecas {
     public int getIdnovelaBiblioteca() {
         return idnovelaBiblioteca;
     }
-    public void setIdnovelaBiblioteca(int idnovelaBiblioteca) {
-        this.idnovelaBiblioteca = idnovelaBiblioteca;
-    }
+    public void setIdnovelaBiblioteca(int idnovelaBiblioteca) {this.idnovelaBiblioteca = idnovelaBiblioteca;}
     public int getNovelas_idNovela() {
         return Novelas_idNovela;
     }
