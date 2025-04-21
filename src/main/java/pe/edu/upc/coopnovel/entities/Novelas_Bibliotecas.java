@@ -21,6 +21,10 @@ public class Novelas_Bibliotecas {
         this.Biblioteca_idBiblioteca = biblioteca_idBiblioteca;
     }
 
+    public Novelas_Bibliotecas() {
+
+    }
+
     public int getIdnovelaBiblioteca() {
         return idnovelaBiblioteca;
     }
