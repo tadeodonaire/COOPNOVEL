@@ -14,6 +14,6 @@ public abstract class Novelas_BibliotecasServiceImplement implements INovelas_Bi
     private INovelas_BibliotecasRepository nBL;
     @Override
     public List<Novelas_Bibliotecas> list() {
-        return List.of();
+        return nBL.findAll();
     }
 }
