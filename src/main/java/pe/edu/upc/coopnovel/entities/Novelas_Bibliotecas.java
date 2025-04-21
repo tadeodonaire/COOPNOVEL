@@ -16,8 +16,8 @@ public class Novelas_Bibliotecas {
 
     public Novelas_Bibliotecas(int idnovelaBiblioteca, int novelas_idNovela, int biblioteca_idBiblioteca) {
         this.idnovelaBiblioteca = idnovelaBiblioteca;
-        Novelas_idNovela = novelas_idNovela;
-        Biblioteca_idBiblioteca = biblioteca_idBiblioteca;
+        this.Novelas_idNovela = novelas_idNovela;
+        this.Biblioteca_idBiblioteca = biblioteca_idBiblioteca;
     }
 
     public int getIdnovelaBiblioteca() {
