@@ -7,6 +7,7 @@ import pe.edu.upc.coopnovel.dtos.BibliotecaDTO;
 import pe.edu.upc.coopnovel.entities.Biblioteca;
 import pe.edu.upc.coopnovel.serviceinterfaces.IBibliotecaService;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
@@ -15,7 +16,7 @@ public class BibliotecaController {
     @Autowired
     private IBibliotecaService bibS;
     @GetMapping
-    public List<BibliotecaDTO>list(){
+    public List<BibliotecaDTO> list(){
         return bibS.list().stream().map(x->{
             ModelMapper m = new ModelMapper();
             return m.map(x,BibliotecaDTO.class);
