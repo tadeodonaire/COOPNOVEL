@@ -1,5 +1,6 @@
 package pe.edu.upc.coopnovel.serviceinterfaces;
 
+import org.springframework.data.repository.query.Param;
 import pe.edu.upc.coopnovel.entities.Capitulos;
 
 import java.util.List;
@@ -10,4 +11,5 @@ public interface ICapitulosService {
     public Capitulos listId (int id);
     public void delete (int id);
     public void update (Capitulos capitulos);
+    public List<String[]> findCapituloByName(String titulo);
 }

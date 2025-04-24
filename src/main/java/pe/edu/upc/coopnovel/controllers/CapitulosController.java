@@ -5,10 +5,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.coopnovel.dtos.CapitulosDTO;
+import pe.edu.upc.coopnovel.dtos.NumeroCapituloPorNovelaDTO;
 import pe.edu.upc.coopnovel.dtos.UsuariosDTO;
 import pe.edu.upc.coopnovel.entities.Capitulos;
 import pe.edu.upc.coopnovel.serviceinterfaces.ICapitulosService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,6 +52,22 @@ public class CapitulosController {
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") int id) {
         cS.delete(id);
+    }
+
+
+    @GetMapping("/cantidad-capitulo")
+    public List<NumeroCapituloPorNovelaDTO> cantidadCapitulo(@RequestParam String titulo) {
+        List<NumeroCapituloPorNovelaDTO> dtoLista = new ArrayList<>();
+        List<String[]> filaLista = cS.findCapituloByName(titulo);
+        for (String[] columna : filaLista) {
+            NumeroCapituloPorNovelaDTO dto = new NumeroCapituloPorNovelaDTO();
+            dto.setNovTitulo(columna[0]);
+            dto.setNovResumen(columna[1]);
+            dto.setNovGenero(columna[2]);
+            dto.setNovCantidadCapitulos(Integer.parseInt(columna[3]));
+            dtoLista.add(dto);
+        }
+        return dtoLista;
     }
 
 }
