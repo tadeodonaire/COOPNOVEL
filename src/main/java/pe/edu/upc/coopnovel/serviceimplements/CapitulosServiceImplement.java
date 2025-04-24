@@ -38,4 +38,9 @@ public class CapitulosServiceImplement implements ICapitulosService {
     public void update(Capitulos capitulos) {
         cR.save(capitulos);
     }
+
+    @Override
+    public List<String[]> findCapituloByName(String titulo) {
+        return cR.findCapituloByName(titulo);
+    }
 }

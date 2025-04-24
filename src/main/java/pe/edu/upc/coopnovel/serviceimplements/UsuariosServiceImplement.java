@@ -38,4 +38,10 @@ public class UsuariosServiceImplement implements IUsuariosService {
     public void update(Usuarios usuarios) {
         uR.save(usuarios);
     }
+
+    @Override
+    public List<String[]> ListAge() {
+        return uR.ListAge();
+    }
+
 }
