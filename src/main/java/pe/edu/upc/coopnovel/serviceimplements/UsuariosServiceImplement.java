@@ -7,8 +7,10 @@ import pe.edu.upc.coopnovel.repositories.IUsuariosRepository;
 import pe.edu.upc.coopnovel.serviceinterfaces.IUsuariosService;
 
 import java.util.List;
+
 @Service
 public class UsuariosServiceImplement implements IUsuariosService {
+
     @Autowired
     private IUsuariosRepository uR;
 
@@ -16,4 +18,30 @@ public class UsuariosServiceImplement implements IUsuariosService {
     public List<Usuarios> list() {
         return uR.findAll();
     }
+
+    @Override
+    public void insertUser (Usuarios usuarios) {
+        uR.save(usuarios);
+    }
+
+    @Override
+    public Usuarios listId(int id) {
+        return uR. findById(id).orElse(new Usuarios());
+    }
+
+    @Override
+    public void delete(int id) {
+        uR.deleteById(id);
+    }
+
+    @Override
+    public void update(Usuarios usuarios) {
+        uR.save(usuarios);
+    }
+
+    @Override
+    public List<String[]> ListAge() {
+        return uR.ListAge();
+    }
+
 }
