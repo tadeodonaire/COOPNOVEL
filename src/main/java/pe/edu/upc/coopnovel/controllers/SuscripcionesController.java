@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.coopnovel.dtos.SuscripcionesDTO;
+import pe.edu.upc.coopnovel.dtos.SuscripcionesxUsuarioDTO;
 import pe.edu.upc.coopnovel.entities.Suscripciones;
 import pe.edu.upc.coopnovel.serviceinterfaces.ISuscripcionesService;
 
@@ -31,6 +32,13 @@ public class SuscripcionesController {
         Suscripciones s = m.map(dto, Suscripciones.class);
         sS.insert(s);
     }
+    @GetMapping("/usuario/{idUsuario}")
+    public SuscripcionesxUsuarioDTO buscaridUsuario(@PathVariable("idUsuario") int idUsuario){
+        ModelMapper m = new ModelMapper();
+        SuscripcionesxUsuarioDTO dto=m.map(sS.obtenerSuscripcionesxId(idUsuario), SuscripcionesxUsuarioDTO.class);
+        return dto;
+    }
+
     @GetMapping("/{id}")
     public SuscripcionesDTO buscarId(@PathVariable("id") int id){
         ModelMapper m = new ModelMapper();

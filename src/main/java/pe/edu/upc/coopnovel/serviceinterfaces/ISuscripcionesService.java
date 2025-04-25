@@ -10,4 +10,6 @@ public interface ISuscripcionesService {
     public Suscripciones listId(int id);
     public void update(Suscripciones s);
     public void delete(int id);
+
+    public List<Suscripciones>obtenerSuscripcionesxId(int idUsuario);
 }
