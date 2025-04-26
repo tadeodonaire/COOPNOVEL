@@ -10,5 +10,5 @@ public interface INovelasService {
     public void insert(Novelas n);
     public void update(Novelas n);
     public void delete(int id);
-    public List<Novelas> search(String n);
+    public List<String[]> findbuscarporNombre(String nombre);
 }
