@@ -28,4 +28,9 @@ public class SuscripcionesServiceImplement implements ISuscripcionesService {
 
     @Override
     public void delete(int id) { sR.deleteById(id); }
+
+    @Override
+    public List<String[]> obtenerSuscripcionesxId(int idUsuario) {
+        return sR.findByUsuarioId(idUsuario);
+    }
 }
