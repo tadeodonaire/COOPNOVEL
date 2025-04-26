@@ -10,5 +10,5 @@ public interface IDescargasService {
     public void insert(Descargas d);
     public void update(Descargas d);
     public void delete(int id);
-    public List<Descargas> search(String n);
+    public List<String[]>findbucarporNombreUsuarioDescarga(String nombre);
 }

@@ -4,9 +4,13 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.coopnovel.dtos.DescargasDTO;
+import pe.edu.upc.coopnovel.dtos.HistorialDescargasDTO;
+import pe.edu.upc.coopnovel.dtos.NombreProyectosDTO;
 import pe.edu.upc.coopnovel.entities.Descargas;
 import pe.edu.upc.coopnovel.serviceinterfaces.IDescargasService;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,11 +48,16 @@ public class DescargasController {
         dS.delete(id);
     }
 
-    @GetMapping("/nombres")
-    public List<DescargasDTO> buscarPorNombre(@RequestParam String nombre) {
-        return dS.search(nombre).stream().map(y->{
-            ModelMapper m = new ModelMapper();
-            return m.map(y, DescargasDTO.class);
-        }).collect(Collectors.toList());
+    @GetMapping("/descargaxnombre")
+    public List<HistorialDescargasDTO> buscarporNombreDescarga(@RequestParam String nombre) {
+        List<HistorialDescargasDTO> dtoLista = new ArrayList<>();
+        List<String[]> lista=dS.findbucarporNombreUsuarioDescarga(nombre);
+        for (String[] columna : lista) {
+            HistorialDescargasDTO dto = new HistorialDescargasDTO();
+            dto.setHisFecha(LocalDate.parse(columna[0]));
+            dto.setUsNombre(columna[1]);
+            dtoLista.add(dto);
+        }
+        return dtoLista;
     }
 }

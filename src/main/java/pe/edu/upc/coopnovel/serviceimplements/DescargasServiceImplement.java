@@ -27,8 +27,8 @@ public class DescargasServiceImplement implements IDescargasService {
     public void delete(int id) { dR.deleteById(id); }
 
     @Override
-    public List<Descargas> search(String n) {
-        return dR.buscar(n);
+    public List<String[]> findbucarporNombreUsuarioDescarga(String nombre) {
+        return dR.findbucarporNombreUsuarioDescarga(nombre);
     }
 
 }
