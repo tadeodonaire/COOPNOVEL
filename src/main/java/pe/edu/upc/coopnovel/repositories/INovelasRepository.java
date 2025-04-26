@@ -10,6 +10,9 @@ import java.util.List;
 
 @Repository
 public interface INovelasRepository extends JpaRepository <Novelas, Integer> {
-    @Query("select n from Novelas n where n.novTitulo like %:nombre%")
-    public List<Novelas> buscar(@Param("nombre") String nombre);
+
+    @Query(value = "select n.nov_titulo, n.nov_resumen, n.nov_genero\n" +
+            "from novelas n\n" +
+            "where n.nov_titulo like %:nombre%", nativeQuery = true)
+    public List<String[]>findbucarporNombre(@Param("nombre") String nombre);
 }

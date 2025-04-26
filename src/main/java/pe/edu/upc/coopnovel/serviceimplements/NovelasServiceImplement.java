@@ -28,5 +28,8 @@ public class NovelasServiceImplement implements INovelasService {
     public void delete(int id) { nR.deleteById(id); }
 
     @Override
-    public List<Novelas> search(String n) { return nR.buscar(n); }
+    public List<String[]> findbuscarporNombre(String nombre) {
+        return nR.findbucarporNombre(nombre);
+    }
+
 }
