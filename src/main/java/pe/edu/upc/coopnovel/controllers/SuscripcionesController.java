@@ -8,6 +8,8 @@ import pe.edu.upc.coopnovel.dtos.SuscripcionesxUsuarioDTO;
 import pe.edu.upc.coopnovel.entities.Suscripciones;
 import pe.edu.upc.coopnovel.serviceinterfaces.ISuscripcionesService;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,10 +35,18 @@ public class SuscripcionesController {
         sS.insert(s);
     }
     @GetMapping("/usuario/{idUsuario}")
-    public SuscripcionesxUsuarioDTO buscaridUsuario(@PathVariable("idUsuario") int idUsuario){
-        ModelMapper m = new ModelMapper();
-        SuscripcionesxUsuarioDTO dto=m.map(sS.obtenerSuscripcionesxId(idUsuario), SuscripcionesxUsuarioDTO.class);
-        return dto;
+    public List<SuscripcionesxUsuarioDTO> buscaridUsuario(@PathVariable("idUsuario") int idUsuario){
+        List<SuscripcionesxUsuarioDTO> dtoLista = new ArrayList<>();
+        List<String[]> filaLista = sS.obtenerSuscripcionesxId(idUsuario);
+
+        for (String[] columna : filaLista) {
+            SuscripcionesxUsuarioDTO dto = new SuscripcionesxUsuarioDTO();
+            dto.setIdUsuario(Integer.parseInt(columna[0]));
+            dto.setIdSuscripcion(Integer.parseInt(columna[1]));
+            dto.setSusFechaInicio(LocalDate.parse(columna[2]));
+            dtoLista.add(dto);
+        }
+        return dtoLista;
     }
 
     @GetMapping("/{id}")

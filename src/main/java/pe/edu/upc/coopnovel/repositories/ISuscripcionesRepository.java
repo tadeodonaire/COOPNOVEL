@@ -12,7 +12,9 @@ import java.util.List;
 @Repository
 public interface ISuscripcionesRepository extends JpaRepository<Suscripciones, Integer> {
 
-    @Query("select s from Suscripciones s where s.usuarios.idUsuario= :idUsuario")
-    List<Suscripciones> findByUsuarioId(@Param("idUsuario") int idUsuario);
+    @Query(value = "SELECT s.id_usuario, s.id_suscripcion, s.sus_fecha_inicio \n" +
+            "FROM suscripciones s \n" +
+            "WHERE s.id_usuario = :idUsuario;", nativeQuery = true)
+    List<String[]> findByUsuarioId(@Param("idUsuario") int idUsuario);
 
 }
