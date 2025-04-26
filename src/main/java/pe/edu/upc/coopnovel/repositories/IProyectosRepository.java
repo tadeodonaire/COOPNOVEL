@@ -10,4 +10,9 @@ import java.util.List;
 public interface IProyectosRepository extends JpaRepository<Proyectos, Integer> {
     @Query("select p from Proyectos p join p.usario u where u.usNombre like %:nombre%")
     public List<Proyectos> buscar(@Param("nombre") String nombre);
+
+    @Query(value = "select p.proy_titulo, p.proy_descripcion\n" +
+            "from proyectos p\n" +
+            "where p.proy_titulo like %:nombre%", nativeQuery = true)
+    public List<String[]>findbucarporNombreProyecto(@Param("nombre") String nombre);
 }

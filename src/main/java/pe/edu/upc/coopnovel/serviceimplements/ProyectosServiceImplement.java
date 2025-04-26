@@ -27,7 +27,7 @@ public class ProyectosServiceImplement implements IProyectosService {
     public void delete(int id) { pR.deleteById(id); }
 
     @Override
-    public List<Proyectos> search(String n) {
-        return pR.buscar(n);
+    public List<String[]> findbuscarporNombreProyecto(String nombre) {
+        return pR.findbucarporNombreProyecto(nombre);
     }
 }

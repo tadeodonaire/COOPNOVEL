@@ -3,10 +3,12 @@ package pe.edu.upc.coopnovel.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.coopnovel.dtos.NombreProyectosDTO;
 import pe.edu.upc.coopnovel.dtos.ProyectosDTO;
 import pe.edu.upc.coopnovel.entities.Proyectos;
 import pe.edu.upc.coopnovel.serviceinterfaces.IProyectosService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,11 +46,16 @@ public class ProyectosController {
         pS.delete(id);
     }
 
-    @GetMapping("/nombres")
-    public List<ProyectosDTO> buscarPorNombre(@RequestParam String nombre) {
-        return pS.search(nombre).stream().map(y->{
-            ModelMapper m = new ModelMapper();
-            return m.map(y,ProyectosDTO.class);
-        }).collect(Collectors.toList());
+    @GetMapping("/proyectosxnombre")
+    public List<NombreProyectosDTO> buscarporNombreProyecto(@RequestParam String nombre) {
+        List<NombreProyectosDTO> dtoLista = new ArrayList<>();
+        List<String[]> lista=pS.findbuscarporNombreProyecto(nombre);
+        for (String[] columna : lista) {
+            NombreProyectosDTO dto = new NombreProyectosDTO();
+            dto.setProyTitulo(columna[0]);
+            dto.setProyDescripcion(columna[1]);
+            dtoLista.add(dto);
+        }
+        return dtoLista;
     }
 }

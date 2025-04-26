@@ -45,7 +45,7 @@ public class NovelasController {
     public void eliminar(@PathVariable("id") int id) {nS.delete(id);
     }
 
-    @GetMapping("/nombres")
+    @GetMapping("/nombresxbibliotecas")
     public List<NombreNovelaDTO> buscarporNombre(@RequestParam String nombre) {
         List<NombreNovelaDTO> dtoLista = new ArrayList<>();
         List<String[]> lista=nS.findbuscarporNombre(nombre);
