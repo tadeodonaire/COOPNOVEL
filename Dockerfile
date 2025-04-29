@@ -1,4 +1,4 @@
-FROM eclipse-termurin:23-jdk
+FROM eclipse-termurin:21-jdk
 WORKDIR /app
 
 COPY . .
