@@ -2,7 +2,7 @@ package pe.edu.upc.coopnovel.serviceimplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.edu.upc.coopnovel.entities.Roles;
+import pe.edu.upc.coopnovel.entities.Role;
 import pe.edu.upc.coopnovel.repositories.IRolesRepository;
 import pe.edu.upc.coopnovel.serviceinterfaces.IRolesService;
 
@@ -15,18 +15,18 @@ public class RolesServiceImplement implements IRolesService {
     private IRolesRepository rR;
 
     @Override
-    public List<Roles> list() {
+    public List<Role> list() {
         return rR.findAll();
     }
 
     @Override
-    public void insertRoles(Roles roles) {
-        rR.save(roles);
+    public void insertRoles(Role role) {
+        rR.save(role);
     }
 
     @Override
-    public Roles listId(int id) {
-        return rR. findById(id).orElse(new Roles());
+    public Role listId(int id) {
+        return rR. findById(id).orElse(new Role());
     }
 
     @Override
@@ -35,7 +35,7 @@ public class RolesServiceImplement implements IRolesService {
     }
 
     @Override
-    public void update(Roles roles) {
-        rR.save(roles);
+    public void update(Role role) {
+        rR.save(role);
     }
 }

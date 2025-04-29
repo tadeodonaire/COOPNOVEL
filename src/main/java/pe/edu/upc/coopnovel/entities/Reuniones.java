@@ -16,11 +16,11 @@ public class Reuniones {
     private String reuLink;
 
     @ManyToOne
-    @JoinColumn(name="idUsuario")
+    @JoinColumn(name="id_organizador")
     private Usuarios organizadorReu;
 
     @ManyToOne
-    @JoinColumn(name="idUsuario")
+    @JoinColumn(name="id_participante")
     private Usuarios participanteReu;
 
     public Reuniones() { }

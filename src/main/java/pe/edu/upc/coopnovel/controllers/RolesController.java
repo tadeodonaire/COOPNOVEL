@@ -5,7 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.coopnovel.dtos.RolesDTO;
-import pe.edu.upc.coopnovel.entities.Roles;
+import pe.edu.upc.coopnovel.entities.Role;
 import pe.edu.upc.coopnovel.serviceinterfaces.IRolesService;
 
 import java.util.List;
@@ -30,7 +30,7 @@ public class RolesController {
     @PostMapping
     public void insert (@RequestBody RolesDTO dtorol){
         ModelMapper m=new ModelMapper();
-        Roles r = m.map(dtorol, Roles.class);
+        Role r = m.map(dtorol, Role.class);
         rS.insertRoles(r);
     }
 
@@ -49,7 +49,7 @@ public class RolesController {
     @PutMapping
     public void modificar(@RequestBody RolesDTO dto){
         ModelMapper m=new ModelMapper();
-        Roles r=m.map(dto, Roles.class);
+        Role r=m.map(dto, Role.class);
         rS.update(r);
     }
 
