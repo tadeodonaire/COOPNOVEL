@@ -37,4 +37,7 @@ public class ComentariosServiceImplement implements IComentariosService {
     public void delete(int id) {
         comR.deleteById(id);
     }
+
+    @Override
+    public List<String[]> findCantidadComentarios() { return comR.findCantidadComentarios(); }
 }

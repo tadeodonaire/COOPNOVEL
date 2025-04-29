@@ -4,9 +4,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.coopnovel.dtos.SuscripcionesDTO;
+import pe.edu.upc.coopnovel.dtos.SuscripcionesxUsuarioDTO;
 import pe.edu.upc.coopnovel.entities.Suscripciones;
 import pe.edu.upc.coopnovel.serviceinterfaces.ISuscripcionesService;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,6 +34,21 @@ public class SuscripcionesController {
         Suscripciones s = m.map(dto, Suscripciones.class);
         sS.insert(s);
     }
+    @GetMapping("/usuario/{idUsuario}")
+    public List<SuscripcionesxUsuarioDTO> buscaridUsuario(@PathVariable("idUsuario") int idUsuario){
+        List<SuscripcionesxUsuarioDTO> dtoLista = new ArrayList<>();
+        List<String[]> filaLista = sS.obtenerSuscripcionesxId(idUsuario);
+
+        for (String[] columna : filaLista) {
+            SuscripcionesxUsuarioDTO dto = new SuscripcionesxUsuarioDTO();
+            dto.setIdUsuario(Integer.parseInt(columna[0]));
+            dto.setIdSuscripcion(Integer.parseInt(columna[1]));
+            dto.setSusFechaInicio(LocalDate.parse(columna[2]));
+            dtoLista.add(dto);
+        }
+        return dtoLista;
+    }
+
     @GetMapping("/{id}")
     public SuscripcionesDTO buscarId(@PathVariable("id") int id){
         ModelMapper m = new ModelMapper();

@@ -10,4 +10,5 @@ public interface IComentariosService {
     public Comentarios listById(int id);
     public void update(Comentarios comentario);
     public void delete(int id);
+    public List<String[]> findCantidadComentarios();
 }

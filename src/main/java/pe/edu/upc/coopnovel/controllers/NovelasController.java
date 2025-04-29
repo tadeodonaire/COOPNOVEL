@@ -3,10 +3,12 @@ package pe.edu.upc.coopnovel.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.coopnovel.dtos.NombreNovelaDTO;
 import pe.edu.upc.coopnovel.dtos.NovelasDTO;
 import pe.edu.upc.coopnovel.entities.Novelas;
 import pe.edu.upc.coopnovel.serviceinterfaces.INovelasService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,11 +45,17 @@ public class NovelasController {
     public void eliminar(@PathVariable("id") int id) {nS.delete(id);
     }
 
-    @GetMapping("/nombres")
-    public List<NovelasDTO> buscarPorNombre(@RequestParam String nombre) {
-        return nS.search(nombre).stream().map(y->{
-            ModelMapper m = new ModelMapper();
-            return m.map(y,NovelasDTO.class);
-        }).collect(Collectors.toList());
+    @GetMapping("/nombresxbibliotecas")
+    public List<NombreNovelaDTO> buscarporNombre(@RequestParam String nombre) {
+        List<NombreNovelaDTO> dtoLista = new ArrayList<>();
+        List<String[]> lista=nS.findbuscarporNombre(nombre);
+        for (String[] columna : lista) {
+            NombreNovelaDTO dto = new NombreNovelaDTO();
+            dto.setNovTitulo(columna[0]);
+            dto.setNovResumen(columna[1]);
+            dto.setNovGenero(columna[2]);
+            dtoLista.add(dto);
+        }
+        return dtoLista;
     }
 }
