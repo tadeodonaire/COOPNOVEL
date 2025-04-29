@@ -5,7 +5,7 @@ import pe.edu.upc.coopnovel.entities.Usuarios;
 public class RolesDTO {
     private int idRoles;
     private String role;
-    private Usuarios usuarios;
+    private Usuarios user;
 
     public int getIdRoles() {
         return idRoles;
@@ -23,11 +23,11 @@ public class RolesDTO {
         this.role = role;
     }
 
-    public Usuarios getUsuarios() {
-        return usuarios;
+    public Usuarios getUser() {
+        return user;
     }
 
-    public void setUsuarios(Usuarios usuarios) {
-        this.usuarios = usuarios;
+    public void setUser(Usuarios user) {
+        this.user = user;
     }
 }

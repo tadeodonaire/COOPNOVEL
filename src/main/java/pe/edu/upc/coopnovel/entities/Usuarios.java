@@ -2,10 +2,13 @@ package pe.edu.upc.coopnovel.entities;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
+
 @Entity
 @Table(name = "Usuarios")
-public class Usuarios {
+public class Usuarios implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idUsuario;
@@ -22,23 +25,32 @@ public class Usuarios {
     @Column(name = "usCorreo", length = 50, nullable = false, unique = true)
     private String usCorreo;
 
+    @Column(length = 30, unique = true)
+    private String username;
+
     @Column(name = "usContrasena", length = 50, nullable = false)
-    private String usContrasena;
+    private String password;
 
     @Column(name = "usEnable", nullable = false)
     private Boolean usEnable;
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private List<Role> roles;
+
     public Usuarios() {
     }
 
-    public Usuarios(Boolean usEnable, String usContrasena, String usCorreo, LocalDate usFecNacimiento, String usApellido, String usNombre, int idUsuario) {
-        this.usEnable = usEnable;
-        this.usContrasena = usContrasena;
-        this.usCorreo = usCorreo;
-        this.usFecNacimiento = usFecNacimiento;
-        this.usApellido = usApellido;
-        this.usNombre = usNombre;
+    public Usuarios(int idUsuario, String usNombre, String usApellido, LocalDate usFecNacimiento, String usCorreo, String username, String password, Boolean usEnable, List<Role> roles) {
         this.idUsuario = idUsuario;
+        this.usNombre = usNombre;
+        this.usApellido = usApellido;
+        this.usFecNacimiento = usFecNacimiento;
+        this.usCorreo = usCorreo;
+        this.username = username;
+        this.password = password;
+        this.usEnable = usEnable;
+        this.roles = roles;
     }
 
     public int getIdUsuario() {
@@ -81,12 +93,20 @@ public class Usuarios {
         this.usCorreo = usCorreo;
     }
 
-    public String getUsContrasena() {
-        return usContrasena;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUsContrasena(String usContrasena) {
-        this.usContrasena = usContrasena;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Boolean getUsEnable() {
@@ -95,5 +115,13 @@ public class Usuarios {
 
     public void setUsEnable(Boolean usEnable) {
         this.usEnable = usEnable;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }
