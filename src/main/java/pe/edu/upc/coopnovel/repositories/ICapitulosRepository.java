@@ -17,5 +17,4 @@ public interface ICapitulosRepository extends JpaRepository<Capitulos, Integer> 
             "WHERE n.nov_titulo LIKE %:titulo% " +
             "GROUP BY n.nov_titulo, n.nov_resumen, n.nov_genero", nativeQuery = true)
     List<String[]> findCapituloByName(@Param("titulo") String titulo);
-
 }

@@ -1,7 +1,8 @@
 package pe.edu.upc.coopnovel.entities;
 
 import jakarta.persistence.*;
-
+@Entity
+@Table(name="Correcciones")
 public class Correcciones_IA {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

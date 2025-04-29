@@ -18,18 +18,15 @@ public class Correcciones_IAServiceImplements implements ICorrecciones_IAService
     public List<Correcciones_IA> list() {
         return corR.findAll();
     }
-
     @Override
     public void insertCorreccion(Correcciones_IA correccion) {
         corR.save(correccion);
-
     }
 
     @Override
     public Correcciones_IA listId(int id) {
         return corR.findById(id).orElse(new Correcciones_IA());
     }
-
     @Override
     public void delete(int id) {corR.deleteById(id);}
 
@@ -37,4 +34,16 @@ public class Correcciones_IAServiceImplements implements ICorrecciones_IAService
     public Correcciones_IA update(Correcciones_IA correcciones) {
         return corR.save(correcciones);
     }
+
+    @Override
+    public List<String[]> getCapsinCor() {
+        return corR.getCapsinCor();
+    }
+
+    @Override
+    public List<String[]> getCorrPorIDCap(int idCapitulo) {
+        return corR.getCorrPorIDCap(idCapitulo);
+    }
+
+
 }
