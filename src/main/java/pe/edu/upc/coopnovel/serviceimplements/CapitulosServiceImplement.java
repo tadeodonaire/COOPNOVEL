@@ -43,4 +43,9 @@ public class CapitulosServiceImplement implements ICapitulosService {
     public List<String[]> findCapituloByName(String titulo) {
         return cR.findCapituloByName(titulo);
     }
+
+    @Override
+    public List<String[]> quantityCapitulosbyUsuario() { return cR.quantityCapitulosbyUsuario(); }
+
+
 }
