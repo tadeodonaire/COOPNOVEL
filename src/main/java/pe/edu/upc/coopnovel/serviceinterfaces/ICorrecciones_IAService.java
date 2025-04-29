@@ -10,4 +10,6 @@ public interface ICorrecciones_IAService {
     public Correcciones_IA listId (int id);
     public void delete(int id);
     public Correcciones_IA update (Correcciones_IA correcciones);
+    public List<String[]> getCapsinCor();
+    public List<String[]> getCorrPorIDCap(int idCapitulo);
 }
