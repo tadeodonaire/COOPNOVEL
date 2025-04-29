@@ -3,12 +3,12 @@ package pe.edu.upc.coopnovel.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import pe.edu.upc.coopnovel.entities.Correcciones_IA;
+import pe.edu.upc.coopnovel.entities.CorreccionesIA;
 
 import java.util.List;
 
 @Repository
-public interface ICorrecciones_IARepository extends JpaRepository<Correcciones_IA, Integer> {
+public interface ICorreccionesIARepository extends JpaRepository<CorreccionesIA, Integer> {
 
     @Query(value = "SELECT \n" +
             "    cap.cap_titulo,\n" +

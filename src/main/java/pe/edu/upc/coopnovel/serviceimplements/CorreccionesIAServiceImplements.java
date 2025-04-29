@@ -2,36 +2,36 @@ package pe.edu.upc.coopnovel.serviceimplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.edu.upc.coopnovel.entities.Correcciones_IA;
-import pe.edu.upc.coopnovel.repositories.ICorrecciones_IARepository;
-import pe.edu.upc.coopnovel.serviceinterfaces.ICorrecciones_IAService;
+import pe.edu.upc.coopnovel.entities.CorreccionesIA;
+import pe.edu.upc.coopnovel.repositories.ICorreccionesIARepository;
+import pe.edu.upc.coopnovel.serviceinterfaces.ICorreccionesIAService;
 
 import java.util.List;
 
 @Service
-public class Correcciones_IAServiceImplements implements ICorrecciones_IAService {
+public class CorreccionesIAServiceImplements implements ICorreccionesIAService {
 
     @Autowired
-    private ICorrecciones_IARepository corR;
+    private ICorreccionesIARepository corR;
 
     @Override
-    public List<Correcciones_IA> list() {
+    public List<CorreccionesIA> list() {
         return corR.findAll();
     }
     @Override
-    public void insertCorreccion(Correcciones_IA correccion) {
+    public void insertCorreccion(CorreccionesIA correccion) {
         corR.save(correccion);
     }
 
     @Override
-    public Correcciones_IA listId(int id) {
-        return corR.findById(id).orElse(new Correcciones_IA());
+    public CorreccionesIA listId(int id) {
+        return corR.findById(id).orElse(new CorreccionesIA());
     }
     @Override
     public void delete(int id) {corR.deleteById(id);}
 
     @Override
-    public Correcciones_IA update(Correcciones_IA correcciones) {
+    public CorreccionesIA update(CorreccionesIA correcciones) {
         return corR.save(correcciones);
     }
 

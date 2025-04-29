@@ -2,7 +2,7 @@ package pe.edu.upc.coopnovel.dtos;
 
 import pe.edu.upc.coopnovel.entities.Capitulos;
 
-public class Correcciones_IADTO {
+public class CorreccionesIADTO {
     private int idCorreccionIA;
     private String corCorreccionIA;
     private Capitulos capitulos;

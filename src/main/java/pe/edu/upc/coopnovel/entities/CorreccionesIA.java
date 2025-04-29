@@ -3,7 +3,7 @@ package pe.edu.upc.coopnovel.entities;
 import jakarta.persistence.*;
 @Entity
 @Table(name="Correcciones")
-public class Correcciones_IA {
+public class CorreccionesIA {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idCorreccionIA;
@@ -15,10 +15,10 @@ public class Correcciones_IA {
     @JoinColumn(name = "idCapitulo")
     private Capitulos capitulos;
 
-    public Correcciones_IA() {
+    public CorreccionesIA() {
     }
 
-    public Correcciones_IA(int idCorreccionIA, String corCorreccionIA, Capitulos capitulos) {
+    public CorreccionesIA(int idCorreccionIA, String corCorreccionIA, Capitulos capitulos) {
         this.idCorreccionIA = idCorreccionIA;
         this.corCorreccionIA = corCorreccionIA;
         this.capitulos = capitulos;

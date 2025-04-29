@@ -5,11 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.coopnovel.dtos.CapSinCorrIADTO;
 import pe.edu.upc.coopnovel.dtos.CorrPorIDCapDTO;
-import pe.edu.upc.coopnovel.dtos.Correcciones_IADTO;
-import pe.edu.upc.coopnovel.entities.Correcciones_IA;
+import pe.edu.upc.coopnovel.dtos.CorreccionesIADTO;
+import pe.edu.upc.coopnovel.entities.CorreccionesIA;
 import pe.edu.upc.coopnovel.serviceimplements.CapitulosServiceImplement;
-import pe.edu.upc.coopnovel.serviceimplements.Correcciones_IAServiceImplements;
-import pe.edu.upc.coopnovel.serviceinterfaces.ICorrecciones_IAService;
+import pe.edu.upc.coopnovel.serviceinterfaces.ICorreccionesIAService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,38 +16,38 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/Correcciones")
-public class Correcciones_IAController {
+public class CorreccionesIAController {
     @Autowired
-    private ICorrecciones_IAService corS;
+    private ICorreccionesIAService corS;
     @Autowired
     private CapitulosServiceImplement capitulosServiceImplement;
 
     @GetMapping
-    public List<Correcciones_IADTO> list() {
+    public List<CorreccionesIADTO> list() {
         return corS.list().stream().map(x->{
             ModelMapper m = new ModelMapper();
-            return m.map(x,Correcciones_IADTO.class);
+            return m.map(x, CorreccionesIADTO.class);
         }).collect(Collectors.toList());
     }
 
     @PostMapping
-    public void insert(@RequestBody Correcciones_IADTO dto){
+    public void insert(@RequestBody CorreccionesIADTO dto){
         ModelMapper m = new ModelMapper();
-        Correcciones_IA c = m.map(dto, Correcciones_IA.class);
+        CorreccionesIA c = m.map(dto, CorreccionesIA.class);
         corS.insertCorreccion(c);
     }
 
     @PutMapping
-    public void update(@RequestBody Correcciones_IADTO dto){
+    public void update(@RequestBody CorreccionesIADTO dto){
         ModelMapper m = new ModelMapper();
-        Correcciones_IA c = m.map(dto, Correcciones_IA.class);
+        CorreccionesIA c = m.map(dto, CorreccionesIA.class);
         corS.update(c);
     }
 
     @GetMapping("/{id}")
-    public Correcciones_IADTO listById(@PathVariable ("id") Integer id){
+    public CorreccionesIADTO listById(@PathVariable ("id") Integer id){
         ModelMapper m = new ModelMapper();
-        Correcciones_IADTO dto=m.map(corS.listId(id), Correcciones_IADTO.class);
+        CorreccionesIADTO dto=m.map(corS.listId(id), CorreccionesIADTO.class);
         return dto;
     }
 
