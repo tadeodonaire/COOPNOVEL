@@ -64,8 +64,11 @@ public class WebSecurityConfig {
                                 "/swagger-ui.html",
                                 "/swagger-resources/**",
                                 "/webjars/**",
-                                "/login"
-
+                                "/login",
+                                "/actuator/health",  // Para health checks de Render
+                                "/api-docs/**",      // Alternativa para docs
+                                "/",                 // Endpoint raíz
+                                "/error"             // Para manejo de errores
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
