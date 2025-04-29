@@ -1,9 +1,9 @@
 package pe.edu.upc.coopnovel.dtos;
 
 public class CapitulosDescargadosxUsuarioDTO {
-    String usNombre;
-    String novTitulo;
-    int cantidadDescargas;
+    private String usNombre;
+    private String novTitulo;
+    private int cantidadDescargas;
 
     public String getUsNombre() {
         return usNombre;
