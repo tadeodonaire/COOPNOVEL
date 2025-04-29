@@ -70,7 +70,7 @@ public class CapitulosController {
         return dtoLista;
     }
 
-    @GetMapping("/capitulos_descargados")
+    @GetMapping("/capitulos-descargados")
     public List<CapitulosDescargadosxUsuarioDTO> capitulosDescargados() {
         List<CapitulosDescargadosxUsuarioDTO> dtoLista = new ArrayList<>();
         List<String[]> filaLista = cS.quantityCapitulosbyUsuario();

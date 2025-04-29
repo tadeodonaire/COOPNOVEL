@@ -3,10 +3,13 @@ package pe.edu.upc.coopnovel.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.coopnovel.dtos.CantidadComentariosxCapituloDTO;
 import pe.edu.upc.coopnovel.dtos.ComentariosDTO;
 import pe.edu.upc.coopnovel.entities.Comentarios;
 import pe.edu.upc.coopnovel.serviceinterfaces.IComentariosService;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,6 +51,21 @@ public class ComentariosController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") int id) {
         comS.delete(id);
+    }
+
+    @GetMapping("/cantidad-comentarios")
+    public List<CantidadComentariosxCapituloDTO> listCantidadComentarios() {
+        List<CantidadComentariosxCapituloDTO> dtoLista = new ArrayList<>();
+        List<String[]> filaLista = comS.findCantidadComentarios();
+        for (String[] columna : filaLista) {
+            CantidadComentariosxCapituloDTO dto = new CantidadComentariosxCapituloDTO();
+            dto.setUsNombre(columna[0]);
+            dto.setCapTitulo(columna[1]);
+            dto.setComFecha(LocalDate.parse(columna[2]));
+            dto.setCantidadComentarios(Integer.parseInt(columna[3]));
+            dtoLista.add(dto);
+        }
+        return dtoLista;
     }
 
 }
