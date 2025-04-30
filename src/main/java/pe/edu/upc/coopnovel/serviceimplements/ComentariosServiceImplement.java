@@ -40,4 +40,9 @@ public class ComentariosServiceImplement implements IComentariosService {
 
     @Override
     public List<String[]> findCantidadComentarios() { return comR.findCantidadComentarios(); }
+
+    @Override
+    public List<String[]> getTopTenComentators() {
+        return comR.getTopTenComentators();
+    }
 }

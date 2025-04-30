@@ -5,9 +5,11 @@ import pe.edu.upc.coopnovel.entities.Biblioteca;
 import java.util.List;
 
 public interface IBibliotecaService {
-    void insert(Biblioteca b);
-    List<Biblioteca> list();
-    Biblioteca listById(int id);
-    void update(Biblioteca b);
-    void delete(int id);
+    public void insert(Biblioteca b);
+    public List<Biblioteca> list();
+    public Biblioteca listById(int id);
+    public void update(Biblioteca b);
+    public void delete(int id);
+    public List<String[]> buscarBibliotecasPorNombre(String nombre);
+    public List<String[]> listarBibliotecasConTotalCapitulos();
 }

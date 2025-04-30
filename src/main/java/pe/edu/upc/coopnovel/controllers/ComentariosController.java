@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.coopnovel.dtos.CantidadComentariosxCapituloDTO;
 import pe.edu.upc.coopnovel.dtos.ComentariosDTO;
+import pe.edu.upc.coopnovel.dtos.TopTenComentatorsDTO;
 import pe.edu.upc.coopnovel.entities.Comentarios;
 import pe.edu.upc.coopnovel.serviceinterfaces.IComentariosService;
 
@@ -68,4 +69,18 @@ public class ComentariosController {
         return dtoLista;
     }
 
+    @GetMapping("/top-ten-comentators")
+    public List<TopTenComentatorsDTO> listTopTenComentators() {
+        List<TopTenComentatorsDTO> dtoLista = new ArrayList<>();
+        List<String[]> filaLista = comS.getTopTenComentators();
+        for (String[] columna : filaLista) {
+            TopTenComentatorsDTO dto = new TopTenComentatorsDTO();
+            dto.setIdUsuario(Integer.parseInt(columna[0]));
+            dto.setUsNombre(columna[1]);
+            dto.setUsApellido(columna[2]);
+            dto.setTotalComentarios(Integer.parseInt(columna[3]));
+            dtoLista.add(dto);
+        }
+        return dtoLista;
+    }
 }

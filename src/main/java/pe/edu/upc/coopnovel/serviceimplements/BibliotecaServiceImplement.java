@@ -11,30 +11,40 @@ import java.util.List;
 public class BibliotecaServiceImplement implements IBibliotecaService {
 
     @Autowired
-    private IBibliotecaRepository bibR;
+    private IBibliotecaRepository bR;
 
     @Override
     public void insert(Biblioteca b) {
-        bibR.save(b);
+        bR.save(b);
     }
 
     @Override
     public List<Biblioteca> list() {
-        return bibR.findAll();
+        return bR.findAll();
     }
 
     @Override
     public Biblioteca listById(int id) {
-        return bibR.findById(id).orElse(new Biblioteca());
+        return bR.findById(id).orElse(null);
     }
 
     @Override
     public void update(Biblioteca b) {
-        bibR.save(b);
+        bR.save(b);
     }
 
     @Override
     public void delete(int id) {
-        bibR.deleteById(id);
+        bR.deleteById(id);
+    }
+
+    @Override
+    public List<String[]> buscarBibliotecasPorNombre(String nombre) {
+        return bR.buscarBibliotecasPorNombre(nombre);
+    }
+
+    @Override
+    public List<String[]> listarBibliotecasConTotalCapitulos() {
+        return bR.listarBibliotecasConTotalCapitulos();
     }
 }
