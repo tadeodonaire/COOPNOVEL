@@ -1,17 +1,15 @@
 package pe.edu.upc.coopnovel.serviceinterfaces;
 
 
-import pe.edu.upc.coopnovel.dtos.NovelasBibliotecasDTO;
-import pe.edu.upc.coopnovel.entities.NovelasBibiotecas;
+import pe.edu.upc.coopnovel.entities.NovelasBibliotecas;
 
 import java.util.List;
 
 public interface INovelasBibliotecasService {
 
-    public List<NovelasBibiotecas> list();
-    void insert(NovelasBibiotecas n);
-    void insert(NovelasBibliotecasDTO n);
-    public void update (NovelasBibiotecas novelasBibiotecas);
+    public List<NovelasBibliotecas> list();
+    public void insert(NovelasBibliotecas nb);
+    public void update(NovelasBibliotecas nb);
     public void delete(int id);
 }
 

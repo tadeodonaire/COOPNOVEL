@@ -1,13 +1,30 @@
-package pe.edu.upc.coopnovel.dtos;
+package pe.edu.upc.coopnovel.entities;
 
+import jakarta.persistence.*;
 
-import pe.edu.upc.coopnovel.entities.Biblioteca;
-import pe.edu.upc.coopnovel.entities.Novelas;
-
-public class NovelasBibliotecasDTO {
+@Entity
+@Table(name="NovelasBibliotecas")
+public class NovelasBibliotecas {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idNovelaBiblioteca;
+
+    @ManyToOne
+    @JoinColumn(name = "idNovela",nullable = false)
     private Novelas novelas;
+
+    @ManyToOne
+    @JoinColumn(name = "idBiblioteca",nullable = false)
     private Biblioteca biblioteca;
+
+    public NovelasBibliotecas() {
+    }
+
+    public NovelasBibliotecas(int idNovelaBiblioteca, Novelas novelas, Biblioteca biblioteca) {
+        this.idNovelaBiblioteca = idNovelaBiblioteca;
+        this.novelas = novelas;
+        this.biblioteca = biblioteca;
+    }
 
     public int getIdNovelaBiblioteca() {
         return idNovelaBiblioteca;
