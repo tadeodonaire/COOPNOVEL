@@ -24,4 +24,26 @@ public class NovelasBibiotecas {
         this.NOVELASidBibioteca = NOVELASidBibioteca;
         this.BIBIOTECAidBibioteca = BIBIOTECAidBibioteca;
     }
+
+    public void update(NovelasBibiotecas nb) {
+    }
+
+    public int getIdNovelaBibioetca() {
+        return idNovelaBibioetca;
+    }
+    public void setIdNovelaBibioetca(int idNovelaBibioetca) {
+        this.idNovelaBibioetca = idNovelaBibioetca;
+    }
+    public int getNOVELASidBibioteca() {
+        return NOVELASidBibioteca;
+    }
+    public void setNOVELASidBibioteca(int NOVELASidBibioteca) {
+        this.NOVELASidBibioteca = NOVELASidBibioteca;
+    }
+    public int getBIBIOTECAidBibioteca() {
+        return BIBIOTECAidBibioteca;
+    }
+    public void setBIBIOTECAidBibioteca(int BIBIOTECAidBibioteca) {
+        this.BIBIOTECAidBibioteca = BIBIOTECAidBibioteca;
+    }
 }
