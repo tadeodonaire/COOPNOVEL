@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.coopnovel.dtos.EdadUsuarioDTO;
+import pe.edu.upc.coopnovel.dtos.UserSecurityDTO;
 import pe.edu.upc.coopnovel.dtos.UsuariosDTO;
 import pe.edu.upc.coopnovel.entities.Usuarios;
 import pe.edu.upc.coopnovel.serviceinterfaces.IUsuariosService;
@@ -19,11 +20,11 @@ public class UsuariosController {
     private IUsuariosService uS;
 
     @GetMapping
-    public List <UsuariosDTO> listar(){
+    public List <UserSecurityDTO> listar(){
 
         return uS.list().stream().map(x->{
             ModelMapper m=new ModelMapper();
-            return m.map(x, UsuariosDTO.class);
+            return m.map(x, UserSecurityDTO.class);
         }).collect(Collectors.toList());
     }
 
@@ -35,9 +36,9 @@ public class UsuariosController {
     }
 
     @GetMapping("/{id}")
-    public UsuariosDTO listarId(@PathVariable ("id") Integer id){
+    public UserSecurityDTO listarId(@PathVariable ("id") Integer id){
         ModelMapper m=new ModelMapper();
-        UsuariosDTO dto=m.map(uS.listId(id), UsuariosDTO.class);
+        UserSecurityDTO dto=m.map(uS.listId(id), UserSecurityDTO.class);
         return dto;
     }
 
