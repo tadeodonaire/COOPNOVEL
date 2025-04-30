@@ -45,7 +45,9 @@ public class CapitulosServiceImplement implements ICapitulosService {
     }
 
     @Override
-    public List<String[]> quantityCapitulosbyUsuario() { return cR.quantityCapitulosbyUsuario(); }
+    public List<String[]> quantityCapitulosbyUsuario() {
+        return cR.quantityCapitulosbyUsuario();
+    }
 
 
 }

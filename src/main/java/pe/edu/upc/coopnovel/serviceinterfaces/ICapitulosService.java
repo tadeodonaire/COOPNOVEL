@@ -14,4 +14,5 @@ public interface ICapitulosService {
     public void delete (int id);
     public void update (Capitulos capitulos);
     public List<String[]> findCapituloByName(String titulo);
+    public List<String[]> quantityCapitulosbyUsuario();
 }
