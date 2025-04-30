@@ -20,6 +20,10 @@ public class Role implements Serializable {
     @JsonIgnore
     private Usuarios user;
 
+
+
+
+
     public Usuarios getUser() {
         return user;
     }
