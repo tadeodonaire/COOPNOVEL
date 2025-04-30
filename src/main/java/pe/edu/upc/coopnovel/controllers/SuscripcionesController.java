@@ -3,6 +3,7 @@ package pe.edu.upc.coopnovel.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.coopnovel.dtos.RepeatUsersDTO;
 import pe.edu.upc.coopnovel.dtos.SuscripcionesDTO;
 import pe.edu.upc.coopnovel.dtos.SuscripcionesxUsuarioDTO;
 import pe.edu.upc.coopnovel.entities.Suscripciones;
@@ -67,4 +68,18 @@ public class SuscripcionesController {
         sS.delete(id);
     }
 
+    @GetMapping("/usuarios-suscritos")
+    public List<RepeatUsersDTO> getUsersSubscribedMore() {
+        List<RepeatUsersDTO> dtoLista = new ArrayList<>();
+        List<String[]> filaLista = sS.getUsersSubscribedMore();
+        for (String[] columna : filaLista) {
+            RepeatUsersDTO dto = new RepeatUsersDTO();
+            dto.setIdUsuario(Integer.parseInt(columna[0]));
+            dto.setUsNombre(columna[1]);
+            dto.setUsApellido(columna[2]);
+            dto.setTotalSuscripciones(Integer.parseInt(columna[3]));
+            dtoLista.add(dto);
+        }
+        return dtoLista;
+    }
 }

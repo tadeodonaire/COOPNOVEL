@@ -33,4 +33,9 @@ public class SuscripcionesServiceImplement implements ISuscripcionesService {
     public List<String[]> obtenerSuscripcionesxId(int idUsuario) {
         return sR.findByUsuarioId(idUsuario);
     }
+
+    @Override
+    public List<String[]> getUsersSubscribedMore() {
+        return sR.getUsersSubscribedMore();
+    }
 }
