@@ -15,7 +15,6 @@ public class UsuariosDTO {
     private String username;
     private String password;
     private Boolean usEnable;
-    private List<Role> roles;
 
 
     public int getIdUsuario() {
@@ -82,11 +81,4 @@ public class UsuariosDTO {
         this.usEnable = usEnable;
     }
 
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
 }
