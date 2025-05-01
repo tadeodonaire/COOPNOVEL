@@ -41,7 +41,7 @@ public class Usuarios implements Serializable {
     public Usuarios() {
     }
 
-    public Usuarios(int idUsuario, String usNombre, String usApellido, LocalDate usFecNacimiento, String usCorreo, String username, String password, Boolean usEnable, List<Role> roles) {
+    public Usuarios(int idUsuario, String usNombre, String usApellido, LocalDate usFecNacimiento, String usCorreo, String username, String password, Boolean usEnable) {
         this.idUsuario = idUsuario;
         this.usNombre = usNombre;
         this.usApellido = usApellido;
@@ -50,7 +50,6 @@ public class Usuarios implements Serializable {
         this.username = username;
         this.password = password;
         this.usEnable = usEnable;
-        this.roles = roles;
     }
 
     public int getIdUsuario() {
