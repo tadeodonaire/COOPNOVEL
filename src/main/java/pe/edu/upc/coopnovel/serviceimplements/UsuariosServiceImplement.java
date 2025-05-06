@@ -44,4 +44,14 @@ public class UsuariosServiceImplement implements IUsuariosService {
         return uR.ListAge();
     }
 
+    @Override
+    public Double averagePerChapter() {
+        return uR.averagePerChapter();
+    }
+
+    @Override
+    public List<Object[]> engagementPerUser() {
+        return uR.engagementPerUser();
+    }
+
 }

@@ -4,6 +4,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.coopnovel.dtos.EdadUsuarioDTO;
+import pe.edu.upc.coopnovel.dtos.EngagementPorUsuarioDTO;
+import pe.edu.upc.coopnovel.dtos.PromedioCapituloxUsuarioDTO;
 import pe.edu.upc.coopnovel.dtos.UsuariosDTO;
 import pe.edu.upc.coopnovel.entities.Usuarios;
 import pe.edu.upc.coopnovel.serviceinterfaces.IUsuariosService;
@@ -68,4 +70,25 @@ public class UsuariosController {
         return dtoEdad;
     }
 
+    @GetMapping("/promedio-capitulos")
+    public PromedioCapituloxUsuarioDTO listarPromedioCapitulos() {
+        Double promedio = uS.averagePerChapter();
+        PromedioCapituloxUsuarioDTO dto = new PromedioCapituloxUsuarioDTO();
+        dto.setPromedioCapitulos(promedio != null ? promedio : 0.0);
+        return dto;
+    }
+
+    public List<EngagementPorUsuarioDTO> listarEngagement() {
+        List<EngagementPorUsuarioDTO> dtoEngagement = new ArrayList<>();
+        List<Object[]> filaLista = uS.engagementPerUser();
+        for (Object[] columna : filaLista){
+            EngagementPorUsuarioDTO dto = new EngagementPorUsuarioDTO();
+            dto.setNombreUsuario(columna[0].toString());
+            dto.setTotalCapitulos(Integer.parseInt(columna[1].toString()));
+            dto.setTotalDescargas(Integer.parseInt(columna[2].toString()));
+            dto.setTotalComentarios(Integer.parseInt(columna[3].toString()));
+            dtoEngagement.add(dto);
+        }
+        return dtoEngagement;
+    }
 }

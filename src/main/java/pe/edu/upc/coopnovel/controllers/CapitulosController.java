@@ -69,7 +69,7 @@ public class CapitulosController {
         }
         return dtoLista;
     }
-
+/*
     @GetMapping("/capitulos-descargados")
     public List<CapitulosDescargadosxUsuarioDTO> capitulosDescargados() {
         List<CapitulosDescargadosxUsuarioDTO> dtoLista = new ArrayList<>();
@@ -82,5 +82,5 @@ public class CapitulosController {
             dtoLista.add(dto);
         }
         return dtoLista;
-    }
+    }*/
 }

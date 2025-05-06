@@ -11,4 +11,6 @@ public interface IUsuariosService {
     public void delete (int id);
     public void update (Usuarios usuarios);
     public List<String[]> ListAge();
+    public Double averagePerChapter();
+    public List<Object[]> engagementPerUser();
 }
