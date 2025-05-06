@@ -78,6 +78,7 @@ public class UsuariosController {
         return dto;
     }
 
+    @GetMapping("/engagement")
     public List<EngagementPorUsuarioDTO> listarEngagement() {
         List<EngagementPorUsuarioDTO> dtoEngagement = new ArrayList<>();
         List<Object[]> filaLista = uS.engagementPerUser();
