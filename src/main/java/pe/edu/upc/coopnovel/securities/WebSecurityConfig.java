@@ -64,8 +64,7 @@ public class WebSecurityConfig {
                                 "/swagger-ui.html",
                                 "/swagger-resources/**",
                                 "/webjars/**",
-                                "/login",
-                                "/coopnovel.onrender.com/"
+                                "/login"
 
                         ).permitAll()
                         .anyRequest().authenticated()
