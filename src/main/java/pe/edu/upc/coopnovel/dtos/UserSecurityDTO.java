@@ -1,21 +1,18 @@
 package pe.edu.upc.coopnovel.dtos;
 
-import jakarta.persistence.Column;
 import pe.edu.upc.coopnovel.entities.Role;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public class UsuariosDTO {
+public class UserSecurityDTO {
     private int idUsuario;
     private String usNombre;
     private String usApellido;
     private LocalDate usFecNacimiento;
     private String usCorreo;
     private String username;
-    private String password;
-    private Boolean usEnable;
-
+    private List<Role> roles;
 
     public int getIdUsuario() {
         return idUsuario;
@@ -65,20 +62,11 @@ public class UsuariosDTO {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public List<Role> getRoles() {
+        return roles;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
-
-    public Boolean getUsEnable() {
-        return usEnable;
-    }
-
-    public void setUsEnable(Boolean usEnable) {
-        this.usEnable = usEnable;
-    }
-
 }

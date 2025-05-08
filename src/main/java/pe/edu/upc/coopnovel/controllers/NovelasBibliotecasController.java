@@ -4,40 +4,45 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.coopnovel.dtos.NovelasBibliotecasDTO;
-import pe.edu.upc.coopnovel.entities.NovelasBibiotecas;
+import pe.edu.upc.coopnovel.entities.NovelasBibliotecas;
 import pe.edu.upc.coopnovel.serviceinterfaces.INovelasBibliotecasService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/novelasbibliotecas")
+@RequestMapping("/novelas-bibliotecas")
 public class NovelasBibliotecasController {
 
-    private INovelasBibliotecasService nb;
-    public NovelasBibliotecasController(INovelasBibliotecasService nb) {
-        this.nb = nb;
-    }
+    @Autowired
+    private INovelasBibliotecasService nbS;
 
-    public List <NovelasBibliotecasDTO> listar(){
-        return nb.list().stream().map(x -> {
+    @GetMapping
+    public List<NovelasBibliotecasDTO> listar() {
+
+        return nbS.list().stream().map(x -> {
             ModelMapper m = new ModelMapper();
             return m.map(x, NovelasBibliotecasDTO.class);
-        }).collect(java.util.stream.Collectors.toList());
+        }).collect(Collectors.toList());
     }
-    public void insertar(NovelasBibliotecasDTO dto){
+
+    @PostMapping
+    public void insertar(@RequestBody NovelasBibliotecasDTO nbdto) {
         ModelMapper m = new ModelMapper();
-        NovelasBibiotecas n = m.map(dto,NovelasBibiotecas.class);
-        nb.insert(n);
+        NovelasBibliotecas nb = m.map(nbdto, NovelasBibliotecas.class);
+        nbS.insert(nb);
     }
-    public void modificar(NovelasBibliotecasDTO dto) {
+
+    @PutMapping
+    public void modificar(@RequestBody NovelasBibliotecasDTO nbdto) {
         ModelMapper m = new ModelMapper();
-        NovelasBibiotecas n = m.map(dto, NovelasBibiotecas.class);
-        nb.update(n);
+        NovelasBibliotecas nb = m.map(nbdto, NovelasBibliotecas.class);
+        nbS.update(nb);
     }
 
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") int id) {
-        nb.delete(id);
+        nbS.delete(id);
     }
 
 }

@@ -8,7 +8,6 @@ public class Novelas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private int idNovela;
 
     @Column(name = "novTitulo", length = 30, nullable = false)
