@@ -3,24 +3,24 @@ package pe.edu.upc.coopnovel.dtos;
 import pe.edu.upc.coopnovel.entities.Usuarios;
 
 public class RolesDTO {
-    private int idRoles;
-    private String role;
+    private Long id;
+    private String rol;
     private Usuarios user;
 
-    public int getIdRoles() {
-        return idRoles;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdRoles(int idRoles) {
-        this.idRoles = idRoles;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getRole() {
-        return role;
+    public String getRol() {
+        return rol;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 
     public Usuarios getUser() {

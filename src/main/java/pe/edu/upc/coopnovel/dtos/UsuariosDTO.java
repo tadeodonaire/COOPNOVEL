@@ -1,12 +1,8 @@
 package pe.edu.upc.coopnovel.dtos;
 
-import jakarta.persistence.Column;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-import pe.edu.upc.coopnovel.entities.Role;
+
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class UsuariosDTO {
     private int idUsuario;

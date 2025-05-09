@@ -6,5 +6,5 @@ import pe.edu.upc.coopnovel.entities.Role;
 
 
 @Repository
-public interface IRolesRepository extends JpaRepository<Role, Integer> {
+public interface IRolesRepository extends JpaRepository<Role, Long> {
 }

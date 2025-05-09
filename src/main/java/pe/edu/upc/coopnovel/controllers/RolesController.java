@@ -27,22 +27,23 @@ public class RolesController {
         }).collect(Collectors.toList());
     }
 
+
     @PostMapping
-    public void insert (@RequestBody RolesDTO dtorol){
-        ModelMapper m=new ModelMapper();
-        Role r = m.map(dtorol, Role.class);
+    public void registrar(@RequestBody RolesDTO dto) {
+        ModelMapper m = new ModelMapper();
+        Role r = m.map(dto, Role.class);
         rS.insertRoles(r);
     }
 
     @GetMapping("/{id}")
-    public RolesDTO listarId(@PathVariable ("id") Integer id){
+    public RolesDTO listarId(@PathVariable ("id") Long id){
         ModelMapper m=new ModelMapper();
         RolesDTO dto=m.map(rS.listId(id), RolesDTO.class);
         return dto;
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable ("id") Integer id){
+    public void delete(@PathVariable ("id") Long id){
         rS.delete(id);
     }
 
