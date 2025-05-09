@@ -1,5 +1,6 @@
 package pe.edu.upc.coopnovel.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -28,7 +29,7 @@ public class Usuarios implements Serializable {
     @Column(length = 30, unique = true,nullable = false)
     private String username;
 
-    @Column(name = "usContrasena", nullable = false)
+    @Column(name = "usContrasena",nullable = false)
     private String password;
 
     @Column(name = "usEnable", nullable = false)
@@ -36,6 +37,7 @@ public class Usuarios implements Serializable {
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private List<Role> roles;
 
     public Usuarios() {
