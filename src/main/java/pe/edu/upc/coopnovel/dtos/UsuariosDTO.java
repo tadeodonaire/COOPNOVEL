@@ -11,23 +11,17 @@ import java.util.List;
 public class UsuariosDTO {
     private int idUsuario;
 
-    @Size(max = 30, message = "El nombre no puede tener más de 30 caracteres")
     private String usNombre;
 
-    @Size(max = 30, message = "El nombre no puede tener más de 30 caracteres")
     private String usApellido;
 
 
     private LocalDate usFecNacimiento;
 
-
-    @Size(max = 50, message = "El nombre no puede tener más de 50 caracteres")
     private String usCorreo;
 
-    @Size(max = 30, message = "El nombre no puede tener más de 30 caracteres")
     private String username;
 
-    @NotNull(message = "El nombre de la aplicación no puede ser NULL")
     private String password;
 
 
