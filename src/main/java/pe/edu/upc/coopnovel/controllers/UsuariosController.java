@@ -48,7 +48,7 @@ public class UsuariosController {
     }
 
     @PutMapping
-    public void modificar(@RequestBody UsuariosDTO dto){
+    public void modificar(@RequestBody UserSecurityDTO dto){
         ModelMapper m=new ModelMapper();
         Usuarios u=m.map(dto, Usuarios.class);
         uS.update(u);

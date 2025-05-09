@@ -13,6 +13,7 @@ public class UserSecurityDTO {
     private String usCorreo;
     private String username;
     private List<Role> roles;
+    private Boolean usEnable;
 
     public int getIdUsuario() {
         return idUsuario;
@@ -68,5 +69,13 @@ public class UserSecurityDTO {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public Boolean getUsEnable() {
+        return usEnable;
+    }
+
+    public void setUsEnable(Boolean usEnable) {
+        this.usEnable = usEnable;
     }
 }

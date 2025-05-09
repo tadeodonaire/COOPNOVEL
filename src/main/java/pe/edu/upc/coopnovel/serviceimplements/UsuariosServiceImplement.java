@@ -41,9 +41,6 @@ public class UsuariosServiceImplement implements IUsuariosService {
 
     @Override
     public void update(Usuarios usuarios) {
-        if (!usuarios.getPassword().startsWith("$2a$")) {
-            usuarios.setPassword(passwordEncoder.encode(usuarios.getPassword()));
-        }
         uR.save(usuarios);
     }
 
