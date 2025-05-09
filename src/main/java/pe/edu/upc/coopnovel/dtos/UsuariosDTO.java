@@ -10,21 +10,12 @@ import java.util.List;
 
 public class UsuariosDTO {
     private int idUsuario;
-
     private String usNombre;
-
     private String usApellido;
-
-
     private LocalDate usFecNacimiento;
-
     private String usCorreo;
-
     private String username;
-
     private String password;
-
-
     private Boolean usEnable;
 
 
