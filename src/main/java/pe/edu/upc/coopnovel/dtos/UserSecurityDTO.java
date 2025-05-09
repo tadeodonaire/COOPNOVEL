@@ -12,7 +12,6 @@ public class UserSecurityDTO {
     private LocalDate usFecNacimiento;
     private String usCorreo;
     private String username;
-    private List<Role> roles;
     private Boolean usEnable;
 
     public int getIdUsuario() {
@@ -61,14 +60,6 @@ public class UserSecurityDTO {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
     }
 
     public Boolean getUsEnable() {
