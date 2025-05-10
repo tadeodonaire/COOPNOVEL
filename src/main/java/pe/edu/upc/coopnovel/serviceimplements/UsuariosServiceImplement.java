@@ -24,10 +24,11 @@ public class UsuariosServiceImplement implements IUsuariosService {
     }
 
     @Override
-    public void insertUser (Usuarios usuarios) {
+    public void insertUser(Usuarios usuarios) {
         usuarios.setPassword(passwordEncoder.encode(usuarios.getPassword()));
         uR.save(usuarios);
     }
+
 
     @Override
     public Usuarios listId(int id) {
@@ -41,8 +42,18 @@ public class UsuariosServiceImplement implements IUsuariosService {
 
     @Override
     public void update(Usuarios usuarios) {
-        uR.save(usuarios);
+        Usuarios usuarioExistente = uR.findById(usuarios.getIdUsuario())
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        usuarioExistente.setUsNombre(usuarios.getUsNombre());
+        usuarioExistente.setUsApellido(usuarios.getUsApellido());
+        usuarioExistente.setUsFecNacimiento(usuarios.getUsFecNacimiento());
+        usuarioExistente.setUsCorreo(usuarios.getUsCorreo());
+        usuarioExistente.setUsername(usuarios.getUsername());
+        usuarioExistente.setUsEnable(usuarios.getUsEnable());
+
+        uR.save(usuarioExistente);
     }
+
 
     @Override
     public List<String[]> ListAge() {
