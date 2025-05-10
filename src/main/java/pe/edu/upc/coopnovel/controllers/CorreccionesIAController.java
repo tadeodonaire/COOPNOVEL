@@ -2,6 +2,7 @@ package pe.edu.upc.coopnovel.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.coopnovel.dtos.CapSinCorrIADTO;
 import pe.edu.upc.coopnovel.dtos.CorrPorIDCapDTO;
@@ -16,11 +17,10 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/Correcciones")
+@PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN')")
 public class CorreccionesIAController {
     @Autowired
     private ICorreccionesIAService corS;
-    @Autowired
-    private CapitulosServiceImplement capitulosServiceImplement;
 
     @GetMapping
     public List<CorreccionesIADTO> list() {

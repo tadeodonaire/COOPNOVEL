@@ -2,6 +2,7 @@ package pe.edu.upc.coopnovel.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.coopnovel.dtos.NovelasBibliotecasDTO;
 import pe.edu.upc.coopnovel.entities.NovelasBibliotecas;
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/novelas-bibliotecas")
+@PreAuthorize("hasAnyAuthority('ADMIN','COLABORADOR','USUARIO')")
 public class NovelasBibliotecasController {
 
     @Autowired

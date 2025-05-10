@@ -3,6 +3,7 @@ package pe.edu.upc.coopnovel.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.coopnovel.dtos.RolesDTO;
 import pe.edu.upc.coopnovel.entities.Role;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/roles")
+@PreAuthorize("hasAnyAuthority('ADMIN')")
 public class RolesController {
 
     @Autowired
