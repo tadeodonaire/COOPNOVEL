@@ -19,8 +19,6 @@ import java.util.stream.Collectors;
 public class CorreccionesIAController {
     @Autowired
     private ICorreccionesIAService corS;
-    @Autowired
-    private CapitulosServiceImplement capitulosServiceImplement;
 
     @GetMapping
     public List<CorreccionesIADTO> list() {
@@ -42,6 +40,11 @@ public class CorreccionesIAController {
         ModelMapper m = new ModelMapper();
         CorreccionesIA c = m.map(dto, CorreccionesIA.class);
         corS.update(c);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable ("id") int id){
+        corS.delete(id);
     }
 
     @GetMapping("/{id}")
