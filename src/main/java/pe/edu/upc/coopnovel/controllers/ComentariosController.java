@@ -22,7 +22,7 @@ public class ComentariosController {
     IComentariosService comS;
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN','COLABORADOR','USUARIO')")
+    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN','COLABORADOR','LECTOR')")
     public List<ComentariosDTO> list() {
         return comS.list().stream().map(x->{
             ModelMapper m = new ModelMapper();
@@ -31,7 +31,7 @@ public class ComentariosController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN','COLABORADOR','USUARIO')")
+    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN','COLABORADOR','LECTOR')")
     public void insert(@RequestBody ComentariosDTO comDto) {
         ModelMapper m = new ModelMapper();
         Comentarios com = m.map(comDto, Comentarios.class);
@@ -39,7 +39,7 @@ public class ComentariosController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN','COLABORADOR','USUARIO')")
+    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN','COLABORADOR','LECTOR')")
     public ComentariosDTO listById(@PathVariable("id") Integer id){
         ModelMapper m = new ModelMapper();
         ComentariosDTO comDto = m.map(comS.listById(id), ComentariosDTO.class);
