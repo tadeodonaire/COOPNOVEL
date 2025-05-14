@@ -2,10 +2,10 @@ package pe.edu.upc.coopnovel.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.coopnovel.dtos.EdadUsuarioDTO;
-import pe.edu.upc.coopnovel.dtos.UserSecurityDTO;
+import pe.edu.upc.coopnovel.dtos.EngagementPorUsuarioDTO;
+import pe.edu.upc.coopnovel.dtos.PromedioCapituloxUsuarioDTO;
 import pe.edu.upc.coopnovel.dtos.UsuariosDTO;
 import pe.edu.upc.coopnovel.entities.Usuarios;
 import pe.edu.upc.coopnovel.serviceinterfaces.IUsuariosService;
@@ -16,18 +16,16 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/usuarios")
-@PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN','COLABORADOR','USUARIO')")
 public class UsuariosController {
     @Autowired
     private IUsuariosService uS;
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
-    public List <UserSecurityDTO> listar(){
+    public List <UsuariosDTO> listar(){
 
         return uS.list().stream().map(x->{
             ModelMapper m=new ModelMapper();
-            return m.map(x, UserSecurityDTO.class);
+            return m.map(x, UsuariosDTO.class);
         }).collect(Collectors.toList());
     }
 
@@ -39,20 +37,19 @@ public class UsuariosController {
     }
 
     @GetMapping("/{id}")
-    public UserSecurityDTO listarId(@PathVariable ("id") Integer id){
+    public UsuariosDTO listarId(@PathVariable ("id") Integer id){
         ModelMapper m=new ModelMapper();
-        UserSecurityDTO dto=m.map(uS.listId(id), UserSecurityDTO.class);
+        UsuariosDTO dto=m.map(uS.listId(id), UsuariosDTO.class);
         return dto;
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public void delete(@PathVariable ("id") Integer id){
         uS.delete(id);
     }
 
     @PutMapping
-    public void modificar(@RequestBody UserSecurityDTO dto){
+    public void modificar(@RequestBody UsuariosDTO dto){
         ModelMapper m=new ModelMapper();
         Usuarios u=m.map(dto, Usuarios.class);
         uS.update(u);
@@ -73,4 +70,26 @@ public class UsuariosController {
         return dtoEdad;
     }
 
+    @GetMapping("/promedio-capitulos")
+    public PromedioCapituloxUsuarioDTO listarPromedioCapitulos() {
+        Double promedio = uS.averagePerChapter();
+        PromedioCapituloxUsuarioDTO dto = new PromedioCapituloxUsuarioDTO();
+        dto.setPromedioCapitulos(promedio != null ? promedio : 0.0);
+        return dto;
+    }
+
+    @GetMapping("/engagement")
+    public List<EngagementPorUsuarioDTO> listarEngagement() {
+        List<EngagementPorUsuarioDTO> dtoEngagement = new ArrayList<>();
+        List<Object[]> filaLista = uS.engagementPerUser();
+        for (Object[] columna : filaLista){
+            EngagementPorUsuarioDTO dto = new EngagementPorUsuarioDTO();
+            dto.setNombreUsuario(columna[0].toString());
+            dto.setTotalCapitulos(Integer.parseInt(columna[1].toString()));
+            dto.setTotalDescargas(Integer.parseInt(columna[2].toString()));
+            dto.setTotalComentarios(Integer.parseInt(columna[3].toString()));
+            dtoEngagement.add(dto);
+        }
+        return dtoEngagement;
+    }
 }
