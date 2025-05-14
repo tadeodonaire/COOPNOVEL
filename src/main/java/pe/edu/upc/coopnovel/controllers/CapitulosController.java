@@ -23,7 +23,7 @@ public class CapitulosController {
 
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN','COLABORADOR','USUARIO')")
+    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN','COLABORADOR','LECTOR')")
     public List<CapitulosDTO> listar() {
 
         return cS.list().stream().map(x -> {
@@ -63,7 +63,7 @@ public class CapitulosController {
 
 
     @GetMapping("/cantidad-capitulo")
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN','COLABORADOR','USUARIO')")
+    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN','COLABORADOR','LECTOR')")
     public List<NumeroCapituloPorNovelaDTO> cantidadCapitulo(@RequestParam String titulo) {
         List<NumeroCapituloPorNovelaDTO> dtoLista = new ArrayList<>();
         List<String[]> filaLista = cS.findCapituloByName(titulo);

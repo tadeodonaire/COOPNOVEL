@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/novelas")
-@PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN','COLABORADOR','USUARIO')")
+@PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN','COLABORADOR','LECTOR')")
 public class NovelasController {
 
     @Autowired
