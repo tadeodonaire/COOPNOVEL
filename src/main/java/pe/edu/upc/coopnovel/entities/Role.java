@@ -13,6 +13,7 @@ public class Role implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String rol;
 
     @ManyToOne
@@ -21,16 +22,6 @@ public class Role implements Serializable {
     private Usuarios user;
 
 
-
-
-
-    public Usuarios getUser() {
-        return user;
-    }
-
-    public void setUser(Usuarios user) {
-        this.user = user;
-    }
 
     public Long getId() {
         return id;
@@ -48,4 +39,11 @@ public class Role implements Serializable {
         this.rol = rol;
     }
 
+    public Usuarios getUser() {
+        return user;
+    }
+
+    public void setUser(Usuarios user) {
+        this.user = user;
+    }
 }

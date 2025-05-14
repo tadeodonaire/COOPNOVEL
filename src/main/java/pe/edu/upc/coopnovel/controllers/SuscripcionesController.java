@@ -2,6 +2,7 @@ package pe.edu.upc.coopnovel.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.coopnovel.dtos.RepeatUsersDTO;
 import pe.edu.upc.coopnovel.dtos.SuscripcionesDTO;
@@ -16,12 +17,14 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/suscripciones")
+@PreAuthorize("hasAnyAuthority('ADMIN','COLABORADOR','LECTOR')")
 public class SuscripcionesController {
 
     @Autowired
     private ISuscripcionesService sS;
 
     @GetMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public List<SuscripcionesDTO> listar(){
 
         return sS.list().stream().map(x->{
@@ -69,6 +72,7 @@ public class SuscripcionesController {
     }
 
     @GetMapping("/usuarios-suscritos")
+    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN')")
     public List<RepeatUsersDTO> getUsersSubscribedMore() {
         List<RepeatUsersDTO> dtoLista = new ArrayList<>();
         List<String[]> filaLista = sS.getUsersSubscribedMore();
