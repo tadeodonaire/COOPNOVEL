@@ -6,7 +6,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.coopnovel.dtos.CantidadComentariosxCapituloDTO;
 import pe.edu.upc.coopnovel.dtos.ComentariosDTO;
-import pe.edu.upc.coopnovel.dtos.TopTenComentatorsDTO;
+import pe.edu.upc.coopnovel.dtos.TopThreeComentatorsDTO;
 import pe.edu.upc.coopnovel.entities.Comentarios;
 import pe.edu.upc.coopnovel.serviceinterfaces.IComentariosService;
 
@@ -76,13 +76,13 @@ public class ComentariosController {
         return dtoLista;
     }
 
-    @GetMapping("/top-ten-comentators")
+    @GetMapping("/top-three-comentators")
     @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN')")
-    public List<TopTenComentatorsDTO> listTopTenComentators() {
-        List<TopTenComentatorsDTO> dtoLista = new ArrayList<>();
-        List<String[]> filaLista = comS.getTopTenComentators();
+    public List<TopThreeComentatorsDTO> listTopTenComentators() {
+        List<TopThreeComentatorsDTO> dtoLista = new ArrayList<>();
+        List<String[]> filaLista = comS.getTopThreeComentators();
         for (String[] columna : filaLista) {
-            TopTenComentatorsDTO dto = new TopTenComentatorsDTO();
+            TopThreeComentatorsDTO dto = new TopThreeComentatorsDTO();
             dto.setIdUsuario(Integer.parseInt(columna[0]));
             dto.setUsNombre(columna[1]);
             dto.setUsApellido(columna[2]);

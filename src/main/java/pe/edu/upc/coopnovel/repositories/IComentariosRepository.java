@@ -16,11 +16,11 @@ public interface IComentariosRepository extends JpaRepository<Comentarios, Integ
             "group by u.us_nombre, ca.cap_titulo, c.com_fecha\n" +
             "order by u.us_nombre, ca.cap_titulo, c.com_fecha\n", nativeQuery = true)
     public List<String[]> findCantidadComentarios();
-    @Query(value="SELECT u.idUsuario, u.usNombre, u.usApellido, COUNT(c.idComentario) AS totalComentarios\n" +
+    @Query(value="SELECT u.id_usuario, u.us_nombre, u.us_apellido, COUNT(c.id_comentario) AS totalComentarios\n" +
             "FROM Comentarios c\n" +
-            "JOIN Usuarios u ON c.idUsuario = u.idUsuario\n" +
-            "GROUP BY u.idUsuario, u.usNombre, u.usApellido\n" +
+            "JOIN Usuarios u ON c.id_usuario = u.id_usuario\n" +
+            "GROUP BY u.id_usuario, u.us_nombre, u.us_apellido\n" +
             "ORDER BY totalComentarios DESC\n" +
-            "LIMIT 10\n", nativeQuery = true)
-    public List<String[]> getTopTenComentators();
+            "LIMIT 3\n", nativeQuery = true)
+    public List<String[]> getTopThreeComentators();
 }

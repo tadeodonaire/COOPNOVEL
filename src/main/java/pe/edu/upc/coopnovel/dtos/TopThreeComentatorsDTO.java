@@ -1,6 +1,6 @@
 package pe.edu.upc.coopnovel.dtos;
 
-public class TopTenComentatorsDTO {
+public class TopThreeComentatorsDTO {
     private int idUsuario;
     private String usNombre;
     private String usApellido;
