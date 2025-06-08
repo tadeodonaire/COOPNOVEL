@@ -25,7 +25,7 @@ public class BibliotecaServiceImplement implements IBibliotecaService {
 
     @Override
     public Biblioteca listById(int id) {
-        return bR.findById(id).orElse(null);
+        return bR.findById(id).orElse(new Biblioteca());
     }
 
     @Override

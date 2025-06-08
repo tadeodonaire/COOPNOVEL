@@ -17,11 +17,11 @@ public class Capitulos {
     private String capContenido;
 
     @ManyToOne
-    @JoinColumn(name = "idNovela")
+    @JoinColumn(name = "idNovela",nullable = false)
     private Novelas novelas;
 
     @ManyToOne
-    @JoinColumn(name = "idDescarga")
+    @JoinColumn(name = "idDescarga",nullable = false)
     private Descargas descargas;
 
     public Capitulos() {
@@ -67,11 +67,11 @@ public class Capitulos {
         this.novelas = novelas;
     }
 
-    public Descargas getDescarga() {
+    public Descargas getDescargas() {
         return descargas;
     }
 
-    public void setDescarga(Descargas descargas) {
+    public void setDescargas(Descargas descargas) {
         this.descargas = descargas;
     }
 }

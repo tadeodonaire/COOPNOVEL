@@ -37,6 +37,13 @@ public class ProyectosController {
         pS.insert(p);
     }
 
+    @GetMapping("/{id}")
+    public ProyectosDTO listarId(@PathVariable("id") int id) {
+        ModelMapper m = new ModelMapper();
+        ProyectosDTO dto = m.map(pS.searchbyId(id), ProyectosDTO.class);
+        return dto;
+    }
+
     @PutMapping
     public void modificar(@RequestBody ProyectosDTO dto) {
         ModelMapper m = new ModelMapper();

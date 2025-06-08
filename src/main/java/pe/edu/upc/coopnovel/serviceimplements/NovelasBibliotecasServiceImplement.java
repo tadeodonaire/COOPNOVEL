@@ -26,6 +26,11 @@ public class NovelasBibliotecasServiceImplement implements INovelasBibliotecasSe
     }
 
     @Override
+    public NovelasBibliotecas searchbyid(int id) {
+        return nbR.findById(id).orElse(new NovelasBibliotecas());
+    }
+
+    @Override
     public void update(NovelasBibliotecas nb) {
         nbR.save(nb);
     }

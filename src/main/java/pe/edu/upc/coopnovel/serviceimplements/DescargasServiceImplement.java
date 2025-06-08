@@ -21,6 +21,11 @@ public class DescargasServiceImplement implements IDescargasService {
     public void insert(Descargas d) { dR.save(d); }
 
     @Override
+    public Descargas searchbyid(int id) {
+        return dR.findById(id).orElse(new Descargas());
+    }
+
+    @Override
     public void update(Descargas d) { dR.save(d); }
 
     @Override

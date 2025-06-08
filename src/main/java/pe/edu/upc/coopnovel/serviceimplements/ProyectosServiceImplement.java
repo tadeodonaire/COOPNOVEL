@@ -21,6 +21,11 @@ public class ProyectosServiceImplement implements IProyectosService {
     public void insert(Proyectos p) { pR.save(p); }
 
     @Override
+    public Proyectos searchbyId(int id) {
+        return pR.findById(id).orElse(new Proyectos());
+    }
+
+    @Override
     public void update(Proyectos p) { pR.save(p); }
 
     @Override
