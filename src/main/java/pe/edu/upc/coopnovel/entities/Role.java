@@ -22,7 +22,6 @@ public class Role implements Serializable {
     private Usuarios user;
 
 
-
     public Long getId() {
         return id;
     }
