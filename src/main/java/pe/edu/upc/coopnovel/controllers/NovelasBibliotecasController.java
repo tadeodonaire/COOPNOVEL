@@ -42,6 +42,13 @@ public class NovelasBibliotecasController {
         nbS.update(nb);
     }
 
+    @GetMapping("/{id}")
+    public NovelasBibliotecasDTO listarId(@PathVariable("id") int id) {
+        ModelMapper m = new ModelMapper();
+        NovelasBibliotecasDTO dto = m.map(nbS.searchbyid(id), NovelasBibliotecasDTO.class);
+        return dto;
+    }
+
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") int id) {
         nbS.delete(id);

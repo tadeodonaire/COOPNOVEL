@@ -13,7 +13,7 @@ public class NovelasDTO {
 
     private String novGenero;
 
-    private Proyectos proyectos;
+    private ProyectosDTO proyectos;
 
 
 
@@ -50,11 +50,11 @@ public class NovelasDTO {
         this.novGenero = novGenero;
     }
 
-    public Proyectos getProyectos() {
+    public ProyectosDTO getProyectos() {
         return proyectos;
     }
 
-    public void setProyectos(Proyectos proyectos) {
+    public void setProyectos(ProyectosDTO proyectos) {
         this.proyectos = proyectos;
     }
 }

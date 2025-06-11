@@ -22,6 +22,11 @@ public class NovelasServiceImplement implements INovelasService {
     public void insert(Novelas n) { nR.save(n); }
 
     @Override
+    public Novelas searchbyid(int id) {
+        return nR.findById(id).orElse(new Novelas());
+    }
+
+    @Override
     public void update(Novelas n) { nR.save(n); }
 
     @Override

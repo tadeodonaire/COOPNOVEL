@@ -8,7 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.coopnovel.dtos.CapitulosDTO;
 import pe.edu.upc.coopnovel.dtos.NumeroCapituloPorNovelaDTO;
 import pe.edu.upc.coopnovel.entities.Capitulos;
+import pe.edu.upc.coopnovel.entities.Descargas;
+import pe.edu.upc.coopnovel.entities.Novelas;
 import pe.edu.upc.coopnovel.serviceinterfaces.ICapitulosService;
+import pe.edu.upc.coopnovel.serviceinterfaces.IDescargasService;
+import pe.edu.upc.coopnovel.serviceinterfaces.INovelasService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +24,8 @@ public class CapitulosController {
 
     @Autowired
     private ICapitulosService cS;
-
+    private INovelasService novelaService;
+    private IDescargasService descargaService;
 
     @GetMapping
     @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN','COLABORADOR','LECTOR')")
@@ -49,7 +54,7 @@ public class CapitulosController {
     }
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN','COLABORADOR')")
-    public CapitulosDTO listarId(@PathVariable ("id") Integer id){
+    public CapitulosDTO listarId(@PathVariable ("id") int id){
         ModelMapper m=new ModelMapper();
         CapitulosDTO dto=m.map(cS.listId(id), CapitulosDTO.class);
         return dto;

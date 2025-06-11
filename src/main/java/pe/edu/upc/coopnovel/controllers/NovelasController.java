@@ -37,6 +37,13 @@ public class NovelasController {
         nS.insert(n);
     }
 
+    @GetMapping("/{id}")
+    public NovelasDTO listarId(@PathVariable("id") int id) {
+        ModelMapper m = new ModelMapper();
+        NovelasDTO dto = m.map(nS.searchbyid(id), NovelasDTO.class);
+        return dto;
+    }
+
     @PutMapping
     public void modificar(@RequestBody NovelasDTO dto) {
         ModelMapper m = new ModelMapper();

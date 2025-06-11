@@ -10,7 +10,7 @@ public class ProyectosDTO {
 
     private String proyDescripcion;
 
-    private Usuarios usario;
+    private UserSecurityDTO usario;
 
     public int getIdProyecto() {
         return idProyecto;
@@ -36,11 +36,11 @@ public class ProyectosDTO {
         this.proyDescripcion = proyDescripcion;
     }
 
-    public Usuarios getUsario() {
+    public UserSecurityDTO getUsario() {
         return usario;
     }
 
-    public void setUsario(Usuarios usario) {
+    public void setUsario(UserSecurityDTO usario) {
         this.usario = usario;
     }
 }

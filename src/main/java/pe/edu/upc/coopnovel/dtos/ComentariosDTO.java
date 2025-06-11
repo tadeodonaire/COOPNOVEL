@@ -9,8 +9,8 @@ public class ComentariosDTO {
     private int idComentario;
     private String comContenido;
     private LocalDate comFecha;
-    private Usuarios usuario;
-    private Capitulos capitulo;
+    private UserSecurityDTO usuario;
+    private CapitulosDTO capitulo;
 
     public int getIdComentario() {
         return idComentario;
@@ -36,19 +36,19 @@ public class ComentariosDTO {
         this.comFecha = comFecha;
     }
 
-    public Usuarios getUsuario() {
+    public UserSecurityDTO getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuarios usuario) {
+    public void setUsuario(UserSecurityDTO usuario) {
         this.usuario = usuario;
     }
 
-    public Capitulos getCapitulo() {
+    public CapitulosDTO getCapitulo() {
         return capitulo;
     }
 
-    public void setCapitulo(Capitulos capitulo) {
+    public void setCapitulo(CapitulosDTO capitulo) {
         this.capitulo = capitulo;
     }
 }

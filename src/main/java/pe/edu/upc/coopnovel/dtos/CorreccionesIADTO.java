@@ -5,7 +5,7 @@ import pe.edu.upc.coopnovel.entities.Capitulos;
 public class CorreccionesIADTO {
     private int idCorreccionIA;
     private String corCorreccionIA;
-    private Capitulos capitulos;
+    private CapitulosDTO capitulos;
 
     public int getIdCorreccionIA() {
         return idCorreccionIA;
@@ -23,11 +23,11 @@ public class CorreccionesIADTO {
         this.corCorreccionIA = corCorreccionIA;
     }
 
-    public Capitulos getCapitulos() {
+    public CapitulosDTO getCapitulos() {
         return capitulos;
     }
 
-    public void setCapitulos(Capitulos capitulos) {
+    public void setCapitulos(CapitulosDTO capitulos) {
         this.capitulos = capitulos;
     }
 }

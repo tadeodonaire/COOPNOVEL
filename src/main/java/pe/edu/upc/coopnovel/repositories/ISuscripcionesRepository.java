@@ -15,6 +15,7 @@ public interface ISuscripcionesRepository extends JpaRepository<Suscripciones, I
             "FROM suscripciones s \n" +
             "WHERE s.id_usuario = :idUsuario;", nativeQuery = true)
     List<String[]> findByUsuarioId(@Param("idUsuario") int idUsuario);
+
     @Query(value="SELECT u.id_usuario, u.us_nombre, u.us_apellido, COUNT(s.id_suscripcion) AS totalSuscripciones\n" +
             "FROM Suscripciones s\n" +
             "JOIN Usuarios u ON s.id_usuario = u.id_usuario\n" +
