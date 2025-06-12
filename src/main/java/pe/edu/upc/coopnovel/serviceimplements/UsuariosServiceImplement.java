@@ -1,7 +1,7 @@
 package pe.edu.upc.coopnovel.serviceimplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pe.edu.upc.coopnovel.entities.Usuarios;
 import pe.edu.upc.coopnovel.repositories.IUsuariosRepository;
@@ -15,8 +15,8 @@ public class UsuariosServiceImplement implements IUsuariosService {
     @Autowired
     private IUsuariosRepository uR;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    //@Autowired
+    //private PasswordEncoder passwordEncoder;
 
     @Override
     public List<Usuarios> list() {
@@ -25,7 +25,7 @@ public class UsuariosServiceImplement implements IUsuariosService {
 
     @Override
     public void insertUser(Usuarios usuarios) {
-        usuarios.setPassword(passwordEncoder.encode(usuarios.getPassword()));
+        // usuarios.setPassword(passwordEncoder.encode(usuarios.getPassword()));
         uR.save(usuarios);
     }
 
