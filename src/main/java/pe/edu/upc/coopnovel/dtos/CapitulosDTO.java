@@ -2,13 +2,14 @@ package pe.edu.upc.coopnovel.dtos;
 
 
 import pe.edu.upc.coopnovel.entities.Descargas;
+import pe.edu.upc.coopnovel.entities.Novelas;
 
 public class CapitulosDTO {
     private int idCapitulo;
     private String capTitulo;
     private String capContenido;
-    private NovelasDTO novelas;
-    private DescargasDTO descargas;
+    private Novelas novelas;
+    private Descargas descargas;
 
 
     public int getIdCapitulo() {
@@ -35,19 +36,19 @@ public class CapitulosDTO {
         this.capContenido = capContenido;
     }
 
-    public NovelasDTO getNovelas() {
+    public Novelas getNovelas() {
         return novelas;
     }
 
-    public void setNovelas(NovelasDTO novelas) {
+    public void setNovelas(Novelas novelas) {
         this.novelas = novelas;
     }
 
-    public DescargasDTO getDescargas() {
+    public Descargas getDescargas() {
         return descargas;
     }
 
-    public void setDescargas(DescargasDTO descargas) {
+    public void setDescargas(Descargas descargas) {
         this.descargas = descargas;
     }
 }
