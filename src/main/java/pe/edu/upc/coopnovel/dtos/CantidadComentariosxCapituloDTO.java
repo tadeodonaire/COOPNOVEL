@@ -1,11 +1,9 @@
 package pe.edu.upc.coopnovel.dtos;
 
-import java.time.LocalDate;
 
 public class CantidadComentariosxCapituloDTO {
     private String usNombre;
     private String capTitulo;
-    private LocalDate comFecha;
     private int cantidadComentarios;
 
     public String getUsNombre() {
@@ -22,14 +20,6 @@ public class CantidadComentariosxCapituloDTO {
 
     public void setCapTitulo(String capTitulo) {
         this.capTitulo = capTitulo;
-    }
-
-    public LocalDate getComFecha() {
-        return comFecha;
-    }
-
-    public void setComFecha(LocalDate comFecha) {
-        this.comFecha = comFecha;
     }
 
     public int getCantidadComentarios() {
