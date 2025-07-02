@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.coopnovel.dtos.CapitulosDTO;
+import pe.edu.upc.coopnovel.dtos.CapitulosDescargadosxUsuarioDTO;
 import pe.edu.upc.coopnovel.dtos.NumeroCapituloPorNovelaDTO;
 import pe.edu.upc.coopnovel.entities.Capitulos;
 import pe.edu.upc.coopnovel.serviceinterfaces.ICapitulosService;
@@ -73,6 +74,20 @@ public class CapitulosController {
             dto.setNovResumen(columna[1]);
             dto.setNovGenero(columna[2]);
             dto.setNovCantidadCapitulos(Integer.parseInt(columna[3]));
+            dtoLista.add(dto);
+        }
+        return dtoLista;
+    }
+
+    @GetMapping("/capitulos-descargados")
+    public List<CapitulosDescargadosxUsuarioDTO> cantidadCapituloxdescargados() {
+        List<CapitulosDescargadosxUsuarioDTO> dtoLista = new ArrayList<>();
+        List<String[]> filaLista = cS.quantityCapitulosbyUsuario();
+        for (String[] columna : filaLista) {
+            CapitulosDescargadosxUsuarioDTO dto = new CapitulosDescargadosxUsuarioDTO();
+            dto.setUsNombre(columna[0]);
+            dto.setNovTitulo(columna[1]);
+            dto.setCantidadDescargas(Integer.parseInt(columna[2]));
             dtoLista.add(dto);
         }
         return dtoLista;
