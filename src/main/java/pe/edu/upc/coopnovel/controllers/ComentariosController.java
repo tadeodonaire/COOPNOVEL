@@ -69,8 +69,7 @@ public class ComentariosController {
             CantidadComentariosxCapituloDTO dto = new CantidadComentariosxCapituloDTO();
             dto.setUsNombre(columna[0]);
             dto.setCapTitulo(columna[1]);
-            dto.setComFecha(LocalDate.parse(columna[2]));
-            dto.setCantidadComentarios(Integer.parseInt(columna[3]));
+            dto.setCantidadComentarios(Integer.parseInt(columna[2]));
             dtoLista.add(dto);
         }
         return dtoLista;
