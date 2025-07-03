@@ -17,12 +17,12 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/comentarios")
+@PreAuthorize("hasAnyAuthority('AUTOR', 'ADMINISTRADOR','COLABORADOR','LECTOR')")
 public class ComentariosController {
     @Autowired
     IComentariosService comS;
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN','COLABORADOR','LECTOR')")
     public List<ComentariosDTO> list() {
         return comS.list().stream().map(x->{
             ModelMapper m = new ModelMapper();
@@ -31,7 +31,6 @@ public class ComentariosController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN','COLABORADOR','LECTOR')")
     public void insert(@RequestBody ComentariosDTO comDto) {
         ModelMapper m = new ModelMapper();
         Comentarios com = m.map(comDto, Comentarios.class);
@@ -39,7 +38,6 @@ public class ComentariosController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN','COLABORADOR','LECTOR')")
     public ComentariosDTO listById(@PathVariable("id") Integer id){
         ModelMapper m = new ModelMapper();
         ComentariosDTO comDto = m.map(comS.listById(id), ComentariosDTO.class);
@@ -47,7 +45,6 @@ public class ComentariosController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN')")
     public void update(@RequestBody ComentariosDTO comDto ) {
         ModelMapper m = new ModelMapper();
         Comentarios com = m.map(comDto, Comentarios.class);
@@ -55,13 +52,12 @@ public class ComentariosController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN')")
+    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMINISTRADOR')")
     public void delete(@PathVariable("id") int id) {
         comS.delete(id);
     }
 
     @GetMapping("/cantidad-comentarios")
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN')")
     public List<CantidadComentariosxCapituloDTO> listCantidadComentarios() {
         List<CantidadComentariosxCapituloDTO> dtoLista = new ArrayList<>();
         List<String[]> filaLista = comS.findCantidadComentarios();
@@ -76,7 +72,6 @@ public class ComentariosController {
     }
 
     @GetMapping("/top-three-comentators")
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN')")
     public List<TopThreeComentatorsDTO> listTopTenComentators() {
         List<TopThreeComentatorsDTO> dtoLista = new ArrayList<>();
         List<String[]> filaLista = comS.getTopThreeComentators();

@@ -17,13 +17,11 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/usuarios")
-//@PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN','COLABORADOR','LECTOR')")
 public class UsuariosController {
     @Autowired
     private IUsuariosService uS;
 
     @GetMapping
-    //@PreAuthorize("hasAnyAuthority('ADMIN')")
     public List <UserSecurityDTO> listar(){
 
         return uS.list().stream().map(x->{
@@ -40,6 +38,7 @@ public class UsuariosController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRADOR')")
     public UserSecurityDTO listarId(@PathVariable ("id") Integer id){
         ModelMapper m=new ModelMapper();
         UserSecurityDTO dto=m.map(uS.listId(id), UserSecurityDTO.class);
@@ -47,12 +46,13 @@ public class UsuariosController {
     }
 
     @DeleteMapping("/{id}")
-    //@PreAuthorize("hasAnyAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'LECTOR', 'COLABORADOR', 'AUTOR')")
     public void delete(@PathVariable ("id") Integer id){
         uS.delete(id);
     }
 
     @PutMapping
+    @PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'LECTOR', 'COLABORADOR', 'AUTOR')")
     public void modificar(@RequestBody UserSecurityDTO dto){
         ModelMapper m=new ModelMapper();
         Usuarios u=m.map(dto, Usuarios.class);

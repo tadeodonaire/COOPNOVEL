@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/descargas")
-@PreAuthorize("hasAnyAuthority('ADMIN','COLABORADOR','LECTOR')")
+@PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'LECTOR', 'COLABORADOR', 'AUTOR')")
 public class DescargasController {
 
     @Autowired
@@ -47,12 +47,14 @@ public class DescargasController {
     }
 
     @PutMapping
+    @PreAuthorize("hasAnyAuthority('ADMINISTRADOR')")
     public void modificar(@RequestBody DescargasDTO dto) {
         ModelMapper m = new ModelMapper();
         Descargas d = m.map(dto, Descargas.class);
         dS.update(d);
     }
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRADOR')")
     public void eliminar(@PathVariable("id") int id) {
         dS.delete(id);
     }
