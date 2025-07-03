@@ -4,24 +4,23 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
-@Table(name = "roles", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "rol"})})
+@Table(name = "roles")
 public class Role implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String rol;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
     @JsonIgnore
-    private Usuarios user;
-
-
+    private List<Usuarios> usuarios;
 
     public Long getId() {
         return id;
@@ -39,11 +38,12 @@ public class Role implements Serializable {
         this.rol = rol;
     }
 
-    public Usuarios getUser() {
-        return user;
+    public List<Usuarios> getUsuarios() {
+        return usuarios;
     }
 
-    public void setUser(Usuarios user) {
-        this.user = user;
+    public void setUsuarios(List<Usuarios> usuarios) {
+        this.usuarios = usuarios;
     }
 }
+

@@ -36,10 +36,9 @@ public class Usuarios implements Serializable {
     @Column(name = "usEnable", nullable = false)
     private Boolean usEnable;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    @JsonIgnore
-    private List<Role> roles;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id", nullable = false)
+    private Role role;
 
     public Usuarios() {
     }
@@ -119,11 +118,11 @@ public class Usuarios implements Serializable {
         this.usEnable = usEnable;
     }
 
-    public List<Role> getRoles() {
-        return roles;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
