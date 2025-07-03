@@ -29,6 +29,7 @@ public class Usuarios implements Serializable {
     @Column(length = 30, unique = true,nullable = false)
     private String username;
 
+    @JsonIgnore
     @Column(name = "usContrasena",nullable = false)
     private String password;
 

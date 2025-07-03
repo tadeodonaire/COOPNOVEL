@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.coopnovel.dtos.EdadUsuarioDTO;
+import pe.edu.upc.coopnovel.dtos.QuerySuscripcionDTO;
 import pe.edu.upc.coopnovel.dtos.UserSecurityDTO;
 import pe.edu.upc.coopnovel.dtos.UsuariosDTO;
 import pe.edu.upc.coopnovel.entities.Usuarios;
@@ -73,4 +74,17 @@ public class UsuariosController {
         return dtoEdad;
     }
 
+    @GetMapping("/CantidadSuscripcion")
+    public List<QuerySuscripcionDTO> ListSuscripcionPorMes(@RequestParam("a") int id){
+        List<QuerySuscripcionDTO> dtosub = new ArrayList<>();
+        List<String[]> filaLista = uS.ListSuscripcionPorMes(id);
+        for (String[] columna : filaLista) {
+            QuerySuscripcionDTO dto = new QuerySuscripcionDTO();
+
+            dto.setMes(columna[0]);
+            dto.setTotalSuscripcion(Integer.parseInt(columna[1]));
+            dtosub.add(dto);
+        }
+        return dtosub;
+    }
 }

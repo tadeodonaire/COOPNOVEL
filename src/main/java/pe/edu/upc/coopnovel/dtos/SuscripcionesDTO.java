@@ -10,7 +10,8 @@ public class SuscripcionesDTO {
 
     private LocalDate susFechaInicio;
 
-    private UserSecurityDTO usuarios;
+    private UserSecurityDTO suscriptor;
+    private UserSecurityDTO suscrito;
 
     public int getIdSuscripcion() {
         return idSuscripcion;
@@ -28,11 +29,19 @@ public class SuscripcionesDTO {
         this.susFechaInicio = susFechaInicio;
     }
 
-    public UserSecurityDTO getUsuarios() {
-        return usuarios;
+    public UserSecurityDTO getSuscriptor() {
+        return suscriptor;
     }
 
-    public void setUsuarios(UserSecurityDTO usuarios) {
-        this.usuarios = usuarios;
+    public void setSuscriptor(UserSecurityDTO suscriptor) {
+        this.suscriptor = suscriptor;
+    }
+
+    public UserSecurityDTO getSuscrito() {
+        return suscrito;
+    }
+
+    public void setSuscrito(UserSecurityDTO suscrito) {
+        this.suscrito = suscrito;
     }
 }

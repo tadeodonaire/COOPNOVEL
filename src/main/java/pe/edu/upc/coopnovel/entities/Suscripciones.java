@@ -15,16 +15,14 @@ public class Suscripciones {
     private LocalDate susFechaInicio;
 
     @ManyToOne
-    @JoinColumn(name = "idUsuario")
-    private Usuarios usuarios;
+    @JoinColumn(name = "idSuscriptor")
+    private Usuarios suscriptor;
+
+    @ManyToOne
+    @JoinColumn(name = "idSuscrito")
+    private Usuarios suscrito;
 
     public Suscripciones() {
-    }
-
-    public Suscripciones(int idSuscripcion, LocalDate susFechaInicio, Usuarios usuarios) {
-        this.idSuscripcion = idSuscripcion;
-        this.susFechaInicio = susFechaInicio;
-        this.usuarios = usuarios;
     }
 
     public int getIdSuscripcion() {
@@ -35,19 +33,27 @@ public class Suscripciones {
         this.idSuscripcion = idSuscripcion;
     }
 
+    public Usuarios getSuscrito() {
+        return suscrito;
+    }
+
+    public void setSuscrito(Usuarios suscrito) {
+        this.suscrito = suscrito;
+    }
+
+    public Usuarios getSuscriptor() {
+        return suscriptor;
+    }
+
+    public void setSuscriptor(Usuarios suscriptor) {
+        this.suscriptor = suscriptor;
+    }
+
     public LocalDate getSusFechaInicio() {
         return susFechaInicio;
     }
 
     public void setSusFechaInicio(LocalDate susFechaInicio) {
         this.susFechaInicio = susFechaInicio;
-    }
-
-    public Usuarios getUsuarios() {
-        return usuarios;
-    }
-
-    public void setUsuarios(Usuarios usuarios) {
-        this.usuarios = usuarios;
     }
 }

@@ -10,7 +10,7 @@ public class ComentariosDTO {
     private String comContenido;
     private LocalDate comFecha;
     private UserSecurityDTO usuario;
-    private CapitulosDTO capitulo;
+    private Capitulos capitulo;
 
     public int getIdComentario() {
         return idComentario;
@@ -44,11 +44,11 @@ public class ComentariosDTO {
         this.usuario = usuario;
     }
 
-    public CapitulosDTO getCapitulo() {
+    public Capitulos getCapitulo() {
         return capitulo;
     }
 
-    public void setCapitulo(CapitulosDTO capitulo) {
+    public void setCapitulo(Capitulos capitulo) {
         this.capitulo = capitulo;
     }
 }

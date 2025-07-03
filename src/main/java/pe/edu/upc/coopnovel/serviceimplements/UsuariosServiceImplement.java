@@ -60,4 +60,9 @@ public class UsuariosServiceImplement implements IUsuariosService {
         return uR.ListAge();
     }
 
+    @Override
+    public List<String[]> ListSuscripcionPorMes(int id) {
+        return uR.ListSuscripcionPorMes((id));
+    }
+
 }
