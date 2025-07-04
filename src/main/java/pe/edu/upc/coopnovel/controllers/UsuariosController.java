@@ -4,10 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.coopnovel.dtos.EdadUsuarioDTO;
-import pe.edu.upc.coopnovel.dtos.QuerySuscripcionDTO;
-import pe.edu.upc.coopnovel.dtos.UserSecurityDTO;
-import pe.edu.upc.coopnovel.dtos.UsuariosDTO;
+import pe.edu.upc.coopnovel.dtos.*;
 import pe.edu.upc.coopnovel.entities.Usuarios;
 import pe.edu.upc.coopnovel.serviceinterfaces.IUsuariosService;
 
@@ -87,4 +84,39 @@ public class UsuariosController {
         }
         return dtosub;
     }
+    @GetMapping("/BibliotecaFull")
+    public List<BibliotecaFULLDTO> getBibliotecaFull(@RequestParam("a") int id) {
+        List<BibliotecaFULLDTO> resultado = new ArrayList<>();
+        List<String[]> filas = uS.obtenerBibliotecaCompleta(id); // Llama a tu servicio
+
+        for (String[] columna :filas ) {
+            BibliotecaFULLDTO b = new BibliotecaFULLDTO();
+            b.setIdNovelaBiblioteca(Integer.parseInt(columna[0]));
+            b.setIdBiblioteca(Integer.parseInt(columna[1]));
+            b.setBibNombre(columna[2]);
+            b.setIdNovela(Integer.parseInt(columna[3]));
+            b.setNovTitulo(columna[4]);
+            b.setNovResumen(columna[5]);
+            b.setNovGenero(columna[6]);
+            b.setIdProyecto(Integer.parseInt(columna[7]));
+            b.setProyTitulo(columna[8]);
+            b.setProyDescripcion(columna[9]);
+            b.setIdUsuario(Integer.parseInt(columna[10]));
+            b.setUsNombre(columna[11]);
+            b.setUsApellido(columna[12]);
+            b.setUsername(columna[13]);
+            // Validación segura para columna[14] (idCapitulo)
+            if (columna[14] != null && !columna[14].isBlank()) {
+                b.setIdCapitulo(Integer.parseInt(columna[14]));
+            } else {
+                b.setIdCapitulo(null); // o 0 si prefieres
+            }
+
+            b.setCapTitulo(columna[15] != null ? columna[15] : "");
+            b.setCapContenido(columna[16] != null ? columna[16] : "");
+            resultado.add(b);
+        }
+        return resultado;
+    }
+
 }

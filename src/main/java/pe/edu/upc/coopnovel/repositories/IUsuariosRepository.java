@@ -27,4 +27,24 @@ public interface IUsuariosRepository extends JpaRepository<Usuarios, Integer> {
             "ORDER BY mes;\n",nativeQuery = true)
     public List<String[]> ListSuscripcionPorMes(@Param("id") int id);
 
+
+    @Query(value = """
+    SELECT 
+        nb.id_novela_biblioteca,
+        b.id_biblioteca, b.bib_nombre,
+        n.id_novela, n.nov_titulo, n.nov_resumen, n.nov_genero,
+        p.id_proyecto, p.proy_titulo, p.proy_descripcion,
+        u.id_usuario, u.us_nombre, u.us_apellido, u.username,
+        c.id_capitulo, c.cap_titulo, c.cap_contenido
+    FROM novelas_bibliotecas nb
+    JOIN biblioteca b ON nb.id_biblioteca = b.id_biblioteca
+    JOIN novelas n ON nb.id_novela = n.id_novela
+    JOIN proyectos p ON n.id_proyectos = p.id_proyecto
+    JOIN usuarios u ON p.id_usuarios = u.id_usuario
+    LEFT JOIN capitulos c ON c.id_novela = n.id_novela
+    WHERE u.id_usuario = :usuarioId
+    ORDER BY b.id_biblioteca, n.id_novela, c.id_capitulo
+    """, nativeQuery = true)
+    List<String[]> obtenerBibliotecaCompleta(@Param("usuarioId") int usuarioId);
+
 }

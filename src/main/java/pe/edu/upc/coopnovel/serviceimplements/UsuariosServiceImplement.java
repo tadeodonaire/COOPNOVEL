@@ -65,4 +65,9 @@ public class UsuariosServiceImplement implements IUsuariosService {
         return uR.ListSuscripcionPorMes((id));
     }
 
+    @Override
+    public List<String[]> obtenerBibliotecaCompleta(int usuarioId) {
+        return uR.obtenerBibliotecaCompleta(usuarioId);
+    }
+
 }
