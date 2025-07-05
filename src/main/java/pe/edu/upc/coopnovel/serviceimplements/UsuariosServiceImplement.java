@@ -50,6 +50,7 @@ public class UsuariosServiceImplement implements IUsuariosService {
         usuarioExistente.setUsCorreo(usuarios.getUsCorreo());
         usuarioExistente.setUsername(usuarios.getUsername());
         usuarioExistente.setUsEnable(usuarios.getUsEnable());
+        usuarioExistente.setRole(usuarios.getRole());
 
         uR.save(usuarioExistente);
     }
