@@ -53,6 +53,11 @@ public class CorreccionesIAController {
         return dto;
     }
 
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable ("id") Integer id){
+        corS.delete(id);
+    }
+
     @GetMapping("/CapituloSinCorreccion")
     public List<CapSinCorrIADTO> listarCapitulosSinCorrecciones(){
         List<CapSinCorrIADTO> dtoLista = new ArrayList<>();
