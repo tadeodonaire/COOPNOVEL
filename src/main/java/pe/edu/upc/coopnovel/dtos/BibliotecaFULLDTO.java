@@ -1,8 +1,6 @@
 package pe.edu.upc.coopnovel.dtos;
 
 public class BibliotecaFULLDTO {
-    private Integer idNovelaBiblioteca;
-
     private Integer idBiblioteca;
     private String bibNombre;
 
@@ -11,26 +9,14 @@ public class BibliotecaFULLDTO {
     private String novResumen;
     private String novGenero;
 
-    private Integer idProyecto;
-    private String proyTitulo;
-    private String proyDescripcion;
+    private Integer idCapitulo;
+    private String capTitulo;
+    private String capContenido;
 
     private Integer idUsuario;
     private String usNombre;
     private String usApellido;
     private String username;
-
-    private Integer idCapitulo;
-    private String capTitulo;
-    private String capContenido;
-
-    public Integer getIdNovelaBiblioteca() {
-        return idNovelaBiblioteca;
-    }
-
-    public void setIdNovelaBiblioteca(Integer idNovelaBiblioteca) {
-        this.idNovelaBiblioteca = idNovelaBiblioteca;
-    }
 
     public Integer getIdBiblioteca() {
         return idBiblioteca;
@@ -46,62 +32,6 @@ public class BibliotecaFULLDTO {
 
     public void setBibNombre(String bibNombre) {
         this.bibNombre = bibNombre;
-    }
-
-    public Integer getIdNovela() {
-        return idNovela;
-    }
-
-    public void setIdNovela(Integer idNovela) {
-        this.idNovela = idNovela;
-    }
-
-    public String getNovTitulo() {
-        return novTitulo;
-    }
-
-    public void setNovTitulo(String novTitulo) {
-        this.novTitulo = novTitulo;
-    }
-
-    public String getNovResumen() {
-        return novResumen;
-    }
-
-    public void setNovResumen(String novResumen) {
-        this.novResumen = novResumen;
-    }
-
-    public String getNovGenero() {
-        return novGenero;
-    }
-
-    public void setNovGenero(String novGenero) {
-        this.novGenero = novGenero;
-    }
-
-    public Integer getIdProyecto() {
-        return idProyecto;
-    }
-
-    public void setIdProyecto(Integer idProyecto) {
-        this.idProyecto = idProyecto;
-    }
-
-    public String getProyTitulo() {
-        return proyTitulo;
-    }
-
-    public void setProyTitulo(String proyTitulo) {
-        this.proyTitulo = proyTitulo;
-    }
-
-    public String getProyDescripcion() {
-        return proyDescripcion;
-    }
-
-    public void setProyDescripcion(String proyDescripcion) {
-        this.proyDescripcion = proyDescripcion;
     }
 
     public Integer getIdUsuario() {
@@ -134,6 +64,38 @@ public class BibliotecaFULLDTO {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Integer getIdNovela() {
+        return idNovela;
+    }
+
+    public void setIdNovela(Integer idNovela) {
+        this.idNovela = idNovela;
+    }
+
+    public String getNovTitulo() {
+        return novTitulo;
+    }
+
+    public void setNovTitulo(String novTitulo) {
+        this.novTitulo = novTitulo;
+    }
+
+    public String getNovResumen() {
+        return novResumen;
+    }
+
+    public void setNovResumen(String novResumen) {
+        this.novResumen = novResumen;
+    }
+
+    public String getNovGenero() {
+        return novGenero;
+    }
+
+    public void setNovGenero(String novGenero) {
+        this.novGenero = novGenero;
     }
 
     public Integer getIdCapitulo() {

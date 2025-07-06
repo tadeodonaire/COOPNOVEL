@@ -37,4 +37,9 @@ public class NovelasServiceImplement implements INovelasService {
         return nR.findbucarporNombre(nombre);
     }
 
+    @Override
+    public List<String[]> ObtenerNovelarFULL() {
+        return nR.ObtenerNovelarFULL();
+    }
+
 }
