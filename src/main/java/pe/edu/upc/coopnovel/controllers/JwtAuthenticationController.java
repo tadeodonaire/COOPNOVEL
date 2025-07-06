@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import pe.edu.upc.coopnovel.entities.Usuarios;
 import pe.edu.upc.coopnovel.securities.JwtRequest;
 import pe.edu.upc.coopnovel.securities.JwtResponse;
 import pe.edu.upc.coopnovel.securities.JwtTokenUtil;
@@ -31,7 +32,8 @@ public class JwtAuthenticationController {
     public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest req) throws Exception {
         authenticate(req.getUsername(), req.getPassword());
         final UserDetails userDetails = userDetailsService.loadUserByUsername(req.getUsername());
-        final String token = jwtTokenUtil.generateToken(userDetails);
+        Usuarios usuario = userDetailsService.getUsuarioByUsername(req.getUsername());
+        final String token = jwtTokenUtil.generateToken(userDetails, usuario.getIdUsuario());
         return ResponseEntity.ok(new JwtResponse(token));
     }
 
@@ -46,4 +48,6 @@ public class JwtAuthenticationController {
 
 
     }
+
+
 }

@@ -6,6 +6,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.coopnovel.dtos.NombreNovelaDTO;
 import pe.edu.upc.coopnovel.dtos.NovelasDTO;
+import pe.edu.upc.coopnovel.entities.NovelaFullDTO;
 import pe.edu.upc.coopnovel.entities.Novelas;
 import pe.edu.upc.coopnovel.serviceinterfaces.INovelasService;
 
@@ -66,6 +67,39 @@ public class NovelasController {
             dto.setNovTitulo(columna[0]);
             dto.setNovResumen(columna[1]);
             dto.setNovGenero(columna[2]);
+            dtoLista.add(dto);
+        }
+        return dtoLista;
+    }
+
+    @GetMapping("/NovelasVer")
+    public List<NovelaFullDTO> ObtenerNovelarFULL() {
+        List<NovelaFullDTO> dtoLista = new ArrayList<>();
+        List<String[]> lista=nS.ObtenerNovelarFULL();
+        for (String[] columna : lista) {
+            NovelaFullDTO dto = new NovelaFullDTO();
+
+            dto.setIdNovela(Integer.parseInt(columna[0]));
+            dto.setNovTitulo(columna[1]);
+            dto.setNovResumen(columna[2]);
+            dto.setNovGenero(columna[3]);
+
+            dto.setIdProyecto(Integer.parseInt(columna[4]));
+            dto.setProyTitulo(columna[5]);
+            dto.setProyDescripcion(columna[6]);
+
+            dto.setIdUsuario(Integer.parseInt(columna[7]));
+            dto.setUsNombre(columna[8]);
+            dto.setUsApellido(columna[9]);
+            dto.setUsername(columna[10]);
+
+            // Capítulo puede ser nulo (left join), validar
+            if (columna[11] != null && !columna[11].isEmpty()) {
+                dto.setIdCapitulo(Integer.parseInt(columna[11]));
+                dto.setCapTitulo(columna[12]);
+                dto.setCapContenido(columna[13]);
+            }
+
             dtoLista.add(dto);
         }
         return dtoLista;

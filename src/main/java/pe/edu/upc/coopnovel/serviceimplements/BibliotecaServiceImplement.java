@@ -47,4 +47,9 @@ public class BibliotecaServiceImplement implements IBibliotecaService {
     public List<String[]> listarBibliotecasConTotalCapitulos() {
         return bR.listarBibliotecasConTotalCapitulos();
     }
+
+    @Override
+    public List<Biblioteca> findByUsuario(int idUsuario) {
+        return bR.findByUsuario(idUsuario);
+    }
 }
