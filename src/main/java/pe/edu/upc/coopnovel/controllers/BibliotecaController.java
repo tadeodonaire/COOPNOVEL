@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/bibliotecas")
-@PreAuthorize("hasAnyAuthority('ADMIN','COLABORADOR','LECTOR')")
+@PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'LECTOR', 'COLABORADOR', 'AUTOR')")
 public class BibliotecaController {
 
     @Autowired

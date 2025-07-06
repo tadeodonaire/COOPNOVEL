@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/novelas-bibliotecas")
-@PreAuthorize("hasAnyAuthority('ADMIN','COLABORADOR','LECTOR')")
+@PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'LECTOR', 'COLABORADOR', 'AUTOR')")
 public class NovelasBibliotecasController {
 
     @Autowired
