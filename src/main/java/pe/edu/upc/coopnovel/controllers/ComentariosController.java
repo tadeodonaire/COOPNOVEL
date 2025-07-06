@@ -2,6 +2,8 @@ package pe.edu.upc.coopnovel.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.coopnovel.dtos.CantidadComentariosxCapituloDTO;
@@ -31,10 +33,14 @@ public class ComentariosController {
     }
 
     @PostMapping
-    public void insert(@RequestBody ComentariosDTO comDto) {
+    public ResponseEntity<ComentariosDTO>  insert(@RequestBody ComentariosDTO comDto) {
         ModelMapper m = new ModelMapper();
         Comentarios com = m.map(comDto, Comentarios.class);
-        comS.insert(com);
+        Comentarios guardado = comS.insert(com);
+        Comentarios comentarioCompleto = comS.listById(guardado.getIdComentario());
+        ComentariosDTO dto = m.map(comentarioCompleto, ComentariosDTO.class);
+
+        return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
@@ -85,4 +91,11 @@ public class ComentariosController {
         }
         return dtoLista;
     }
+
+    @GetMapping("/capitulo/{id}")
+    public ResponseEntity<List<ComentariosDTO>> listarPorCapitulo(@PathVariable("id") Integer idCapitulo) {
+        List<ComentariosDTO> lista = comS.findByCapituloIdCapituloOrderByComFechaDesc(idCapitulo);
+        return new ResponseEntity<>(lista, HttpStatus.OK);
+    }
+
 }
