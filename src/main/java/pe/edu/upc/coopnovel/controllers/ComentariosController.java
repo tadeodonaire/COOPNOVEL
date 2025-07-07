@@ -6,7 +6,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.coopnovel.dtos.CantidadComentariosxCapituloDTO;
 import pe.edu.upc.coopnovel.dtos.ComentariosDTO;
-import pe.edu.upc.coopnovel.dtos.TopTenComentatorsDTO;
+import pe.edu.upc.coopnovel.dtos.TopThreeComentatorsDTO;
 import pe.edu.upc.coopnovel.entities.Comentarios;
 import pe.edu.upc.coopnovel.serviceinterfaces.IComentariosService;
 
@@ -17,12 +17,12 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/comentarios")
+@PreAuthorize("hasAnyAuthority('AUTOR', 'ADMINISTRADOR','COLABORADOR','LECTOR')")
 public class ComentariosController {
     @Autowired
     IComentariosService comS;
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN','COLABORADOR','LECTOR')")
     public List<ComentariosDTO> list() {
         return comS.list().stream().map(x->{
             ModelMapper m = new ModelMapper();
@@ -31,7 +31,6 @@ public class ComentariosController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN','COLABORADOR','LECTOR')")
     public void insert(@RequestBody ComentariosDTO comDto) {
         ModelMapper m = new ModelMapper();
         Comentarios com = m.map(comDto, Comentarios.class);
@@ -39,7 +38,6 @@ public class ComentariosController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN','COLABORADOR','LECTOR')")
     public ComentariosDTO listById(@PathVariable("id") Integer id){
         ModelMapper m = new ModelMapper();
         ComentariosDTO comDto = m.map(comS.listById(id), ComentariosDTO.class);
@@ -47,7 +45,6 @@ public class ComentariosController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN')")
     public void update(@RequestBody ComentariosDTO comDto ) {
         ModelMapper m = new ModelMapper();
         Comentarios com = m.map(comDto, Comentarios.class);
@@ -55,13 +52,12 @@ public class ComentariosController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN')")
+    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMINISTRADOR')")
     public void delete(@PathVariable("id") int id) {
         comS.delete(id);
     }
 
     @GetMapping("/cantidad-comentarios")
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN')")
     public List<CantidadComentariosxCapituloDTO> listCantidadComentarios() {
         List<CantidadComentariosxCapituloDTO> dtoLista = new ArrayList<>();
         List<String[]> filaLista = comS.findCantidadComentarios();
@@ -69,20 +65,18 @@ public class ComentariosController {
             CantidadComentariosxCapituloDTO dto = new CantidadComentariosxCapituloDTO();
             dto.setUsNombre(columna[0]);
             dto.setCapTitulo(columna[1]);
-            dto.setComFecha(LocalDate.parse(columna[2]));
-            dto.setCantidadComentarios(Integer.parseInt(columna[3]));
+            dto.setCantidadComentarios(Integer.parseInt(columna[2]));
             dtoLista.add(dto);
         }
         return dtoLista;
     }
 
-    @GetMapping("/top-ten-comentators")
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN')")
-    public List<TopTenComentatorsDTO> listTopTenComentators() {
-        List<TopTenComentatorsDTO> dtoLista = new ArrayList<>();
-        List<String[]> filaLista = comS.getTopTenComentators();
+    @GetMapping("/top-three-comentators")
+    public List<TopThreeComentatorsDTO> listTopTenComentators() {
+        List<TopThreeComentatorsDTO> dtoLista = new ArrayList<>();
+        List<String[]> filaLista = comS.getTopThreeComentators();
         for (String[] columna : filaLista) {
-            TopTenComentatorsDTO dto = new TopTenComentatorsDTO();
+            TopThreeComentatorsDTO dto = new TopThreeComentatorsDTO();
             dto.setIdUsuario(Integer.parseInt(columna[0]));
             dto.setUsNombre(columna[1]);
             dto.setUsApellido(columna[2]);

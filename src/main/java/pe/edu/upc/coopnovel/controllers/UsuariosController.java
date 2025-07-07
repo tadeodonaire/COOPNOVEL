@@ -2,11 +2,9 @@ package pe.edu.upc.coopnovel.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.coopnovel.dtos.EdadUsuarioDTO;
-import pe.edu.upc.coopnovel.dtos.EngagementPorUsuarioDTO;
-import pe.edu.upc.coopnovel.dtos.PromedioCapituloxUsuarioDTO;
-import pe.edu.upc.coopnovel.dtos.UsuariosDTO;
+import pe.edu.upc.coopnovel.dtos.*;
 import pe.edu.upc.coopnovel.entities.Usuarios;
 import pe.edu.upc.coopnovel.serviceinterfaces.IUsuariosService;
 
@@ -21,11 +19,11 @@ public class UsuariosController {
     private IUsuariosService uS;
 
     @GetMapping
-    public List <UsuariosDTO> listar(){
+    public List <UserSecurityDTO> listar(){
 
         return uS.list().stream().map(x->{
             ModelMapper m=new ModelMapper();
-            return m.map(x, UsuariosDTO.class);
+            return m.map(x, UserSecurityDTO.class);
         }).collect(Collectors.toList());
     }
 
@@ -37,19 +35,22 @@ public class UsuariosController {
     }
 
     @GetMapping("/{id}")
-    public UsuariosDTO listarId(@PathVariable ("id") Integer id){
+    @PreAuthorize("hasAnyAuthority('ADMINISTRADOR')")
+    public UserSecurityDTO listarId(@PathVariable ("id") Integer id){
         ModelMapper m=new ModelMapper();
-        UsuariosDTO dto=m.map(uS.listId(id), UsuariosDTO.class);
+        UserSecurityDTO dto=m.map(uS.listId(id), UserSecurityDTO.class);
         return dto;
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'LECTOR', 'COLABORADOR', 'AUTOR')")
     public void delete(@PathVariable ("id") Integer id){
         uS.delete(id);
     }
 
     @PutMapping
-    public void modificar(@RequestBody UsuariosDTO dto){
+    @PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'LECTOR', 'COLABORADOR', 'AUTOR')")
+    public void modificar(@RequestBody UserSecurityDTO dto){
         ModelMapper m=new ModelMapper();
         Usuarios u=m.map(dto, Usuarios.class);
         uS.update(u);
@@ -70,26 +71,52 @@ public class UsuariosController {
         return dtoEdad;
     }
 
-    @GetMapping("/promedio-capitulos")
-    public PromedioCapituloxUsuarioDTO listarPromedioCapitulos() {
-        Double promedio = uS.averagePerChapter();
-        PromedioCapituloxUsuarioDTO dto = new PromedioCapituloxUsuarioDTO();
-        dto.setPromedioCapitulos(promedio != null ? promedio : 0.0);
-        return dto;
+    @GetMapping("/CantidadSuscripcion")
+    public List<QuerySuscripcionDTO> ListSuscripcionPorMes(@RequestParam("a") int id){
+        List<QuerySuscripcionDTO> dtosub = new ArrayList<>();
+        List<String[]> filaLista = uS.ListSuscripcionPorMes(id);
+        for (String[] columna : filaLista) {
+            QuerySuscripcionDTO dto = new QuerySuscripcionDTO();
+
+            dto.setMes(columna[0]);
+            dto.setTotalSuscripcion(Integer.parseInt(columna[1]));
+            dtosub.add(dto);
+        }
+        return dtosub;
+    }
+    @GetMapping("/BibliotecaFull")
+    public List<BibliotecaFULLDTO> getBibliotecaFull(@RequestParam("a") int id) {
+        List<BibliotecaFULLDTO> resultado = new ArrayList<>();
+        List<String[]> filas = uS.obtenerBibliotecaCompleta(id); // Llama a tu servicio
+
+        for (String[] columna :filas ) {
+            BibliotecaFULLDTO b = new BibliotecaFULLDTO();
+            b.setIdNovelaBiblioteca(Integer.parseInt(columna[0]));
+            b.setIdBiblioteca(Integer.parseInt(columna[1]));
+            b.setBibNombre(columna[2]);
+            b.setIdNovela(Integer.parseInt(columna[3]));
+            b.setNovTitulo(columna[4]);
+            b.setNovResumen(columna[5]);
+            b.setNovGenero(columna[6]);
+            b.setIdProyecto(Integer.parseInt(columna[7]));
+            b.setProyTitulo(columna[8]);
+            b.setProyDescripcion(columna[9]);
+            b.setIdUsuario(Integer.parseInt(columna[10]));
+            b.setUsNombre(columna[11]);
+            b.setUsApellido(columna[12]);
+            b.setUsername(columna[13]);
+            // Validación segura para columna[14] (idCapitulo)
+            if (columna[14] != null && !columna[14].isBlank()) {
+                b.setIdCapitulo(Integer.parseInt(columna[14]));
+            } else {
+                b.setIdCapitulo(null); // o 0 si prefieres
+            }
+
+            b.setCapTitulo(columna[15] != null ? columna[15] : "");
+            b.setCapContenido(columna[16] != null ? columna[16] : "");
+            resultado.add(b);
+        }
+        return resultado;
     }
 
-    @GetMapping("/engagement")
-    public List<EngagementPorUsuarioDTO> listarEngagement() {
-        List<EngagementPorUsuarioDTO> dtoEngagement = new ArrayList<>();
-        List<Object[]> filaLista = uS.engagementPerUser();
-        for (Object[] columna : filaLista){
-            EngagementPorUsuarioDTO dto = new EngagementPorUsuarioDTO();
-            dto.setNombreUsuario(columna[0].toString());
-            dto.setTotalCapitulos(Integer.parseInt(columna[1].toString()));
-            dto.setTotalDescargas(Integer.parseInt(columna[2].toString()));
-            dto.setTotalComentarios(Integer.parseInt(columna[3].toString()));
-            dtoEngagement.add(dto);
-        }
-        return dtoEngagement;
-    }
 }

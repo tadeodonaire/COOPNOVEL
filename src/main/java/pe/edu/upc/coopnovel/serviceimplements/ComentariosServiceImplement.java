@@ -42,7 +42,7 @@ public class ComentariosServiceImplement implements IComentariosService {
     public List<String[]> findCantidadComentarios() { return comR.findCantidadComentarios(); }
 
     @Override
-    public List<String[]> getTopTenComentators() {
-        return comR.getTopTenComentators();
+    public List<String[]> getTopThreeComentators() {
+        return comR.getTopThreeComentators();
     }
 }

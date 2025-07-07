@@ -11,8 +11,8 @@ public class ReunionesDTO {
     private String reuTema;
     private LocalDate reuFecha;
     private String reuLink;
-    private Usuarios organizadorReu;
-    private Usuarios participanteReu;
+    private UserSecurityDTO organizadorReu;
+    private UserSecurityDTO participanteReu;
 
     public int getIdReunion() {
         return idReunion;
@@ -46,19 +46,19 @@ public class ReunionesDTO {
         this.reuLink = reuLink;
     }
 
-    public Usuarios getOrganizadorReu() {
-        return organizadorReu;
-    }
-
-    public void setOrganizadorReu(Usuarios organizadorReu) {
-        this.organizadorReu = organizadorReu;
-    }
-
-    public Usuarios getParticipanteReu() {
+    public UserSecurityDTO getParticipanteReu() {
         return participanteReu;
     }
 
-    public void setParticipanteReu(Usuarios participanteReu) {
+    public void setParticipanteReu(UserSecurityDTO participanteReu) {
         this.participanteReu = participanteReu;
+    }
+
+    public UserSecurityDTO getOrganizadorReu() {
+        return organizadorReu;
+    }
+
+    public void setOrganizadorReu(UserSecurityDTO organizadorReu) {
+        this.organizadorReu = organizadorReu;
     }
 }

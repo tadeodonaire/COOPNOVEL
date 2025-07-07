@@ -8,6 +8,7 @@ import pe.edu.upc.coopnovel.dtos.CapSinCorrIADTO;
 import pe.edu.upc.coopnovel.dtos.CorrPorIDCapDTO;
 import pe.edu.upc.coopnovel.dtos.CorreccionesIADTO;
 import pe.edu.upc.coopnovel.entities.CorreccionesIA;
+import pe.edu.upc.coopnovel.serviceimplements.CapitulosServiceImplement;
 import pe.edu.upc.coopnovel.serviceinterfaces.ICorreccionesIAService;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/Correcciones")
-@PreAuthorize("hasAnyAuthority('ADMIN','COLABORADOR','USUARIO')")
+@PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'LECTOR', 'COLABORADOR', 'AUTOR')")
 public class CorreccionesIAController {
     @Autowired
     private ICorreccionesIAService corS;
@@ -30,6 +31,7 @@ public class CorreccionesIAController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'COLABORADOR', 'AUTOR')")
     public void insert(@RequestBody CorreccionesIADTO dto){
         ModelMapper m = new ModelMapper();
         CorreccionesIA c = m.map(dto, CorreccionesIA.class);
@@ -37,15 +39,11 @@ public class CorreccionesIAController {
     }
 
     @PutMapping
+    @PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'COLABORADOR', 'AUTOR')")
     public void update(@RequestBody CorreccionesIADTO dto){
         ModelMapper m = new ModelMapper();
         CorreccionesIA c = m.map(dto, CorreccionesIA.class);
         corS.update(c);
-    }
-
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable ("id") int id){
-        corS.delete(id);
     }
 
     @GetMapping("/{id}")
@@ -62,8 +60,7 @@ public class CorreccionesIAController {
 
         for (String[] columna : filaLista) {
             CapSinCorrIADTO dto = new CapSinCorrIADTO();
-            dto.setIdCapitulo(Integer.parseInt(columna[0]));
-            dto.setCapTitulo(columna[1]);
+            dto.setCapTitulo(columna[0]);
             dtoLista.add(dto);
         }
 
@@ -77,8 +74,7 @@ public class CorreccionesIAController {
         for (String[] columna : filaLista) {
             CorrPorIDCapDTO dto = new CorrPorIDCapDTO();
             dto.setIdCapitulo(Integer.parseInt(columna[0]));
-            dto.setCapContenido(columna[1]);
-            dto.setCorCorreccionIA(columna[2]);
+            dto.setCorCorreccionIA(columna[1]);
             dtoLista.add(dto);
         }
         return dtoLista;

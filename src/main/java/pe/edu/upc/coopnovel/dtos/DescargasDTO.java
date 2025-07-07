@@ -1,16 +1,11 @@
 package pe.edu.upc.coopnovel.dtos;
-
-import pe.edu.upc.coopnovel.entities.Usuarios;
-
 import java.time.LocalDate;
 
 public class DescargasDTO {
 
     private int idDescarga;
-
     private LocalDate hisFecha;
-
-    private Usuarios user;
+    private UserSecurityDTO user;
 
     public int getIdDescarga() {
         return idDescarga;
@@ -28,11 +23,11 @@ public class DescargasDTO {
         this.hisFecha = hisFecha;
     }
 
-    public Usuarios getUser() {
+    public UserSecurityDTO getUser() {
         return user;
     }
 
-    public void setUser(Usuarios user) {
+    public void setUser(UserSecurityDTO user) {
         this.user = user;
     }
 }

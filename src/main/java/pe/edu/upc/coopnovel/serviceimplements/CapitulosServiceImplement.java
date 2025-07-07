@@ -26,7 +26,7 @@ public class CapitulosServiceImplement implements ICapitulosService {
 
     @Override
     public Capitulos listId(int id) {
-        return cR. findById(id).orElse(new Capitulos());
+        return cR.findById(id).orElse(new Capitulos());
     }
 
     @Override

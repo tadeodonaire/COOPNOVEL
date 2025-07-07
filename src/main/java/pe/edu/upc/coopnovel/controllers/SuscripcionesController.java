@@ -17,14 +17,13 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/suscripciones")
-@PreAuthorize("hasAnyAuthority('ADMIN','COLABORADOR','USUARIO')")
+@PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'LECTOR', 'COLABORADOR', 'AUTOR')")
 public class SuscripcionesController {
 
     @Autowired
     private ISuscripcionesService sS;
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public List<SuscripcionesDTO> listar(){
 
         return sS.list().stream().map(x->{
@@ -72,7 +71,6 @@ public class SuscripcionesController {
     }
 
     @GetMapping("/usuarios-suscritos")
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN')")
     public List<RepeatUsersDTO> getUsersSubscribedMore() {
         List<RepeatUsersDTO> dtoLista = new ArrayList<>();
         List<String[]> filaLista = sS.getUsersSubscribedMore();

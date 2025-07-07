@@ -6,7 +6,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.coopnovel.dtos.DescargasDTO;
 import pe.edu.upc.coopnovel.dtos.HistorialDescargasDTO;
-import pe.edu.upc.coopnovel.dtos.NombreProyectosDTO;
+import pe.edu.upc.coopnovel.dtos.NovelasDTO;
 import pe.edu.upc.coopnovel.entities.Descargas;
 import pe.edu.upc.coopnovel.serviceinterfaces.IDescargasService;
 
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/descargas")
-@PreAuthorize("hasAnyAuthority('ADMIN','COLABORADOR','USUARIO')")
+@PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'LECTOR', 'COLABORADOR', 'AUTOR')")
 public class DescargasController {
 
     @Autowired
@@ -39,13 +39,22 @@ public class DescargasController {
         dS.insert(d);
     }
 
+    @GetMapping("/{id}")
+    public DescargasDTO listarId(@PathVariable("id") int id) {
+        ModelMapper m = new ModelMapper();
+        DescargasDTO dto = m.map(dS.searchbyid(id), DescargasDTO.class);
+        return dto;
+    }
+
     @PutMapping
+    @PreAuthorize("hasAnyAuthority('ADMINISTRADOR')")
     public void modificar(@RequestBody DescargasDTO dto) {
         ModelMapper m = new ModelMapper();
         Descargas d = m.map(dto, Descargas.class);
         dS.update(d);
     }
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRADOR')")
     public void eliminar(@PathVariable("id") int id) {
         dS.delete(id);
     }

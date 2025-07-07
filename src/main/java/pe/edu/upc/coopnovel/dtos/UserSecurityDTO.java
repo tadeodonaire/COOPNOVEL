@@ -1,6 +1,8 @@
 package pe.edu.upc.coopnovel.dtos;
 
 
+import pe.edu.upc.coopnovel.entities.Role;
+
 import java.time.LocalDate;
 
 
@@ -12,6 +14,7 @@ public class UserSecurityDTO {
     private String usCorreo;
     private String username;
     private Boolean usEnable;
+    private Role role;
 
     public int getIdUsuario() {
         return idUsuario;
@@ -67,5 +70,13 @@ public class UserSecurityDTO {
 
     public void setUsEnable(Boolean usEnable) {
         this.usEnable = usEnable;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

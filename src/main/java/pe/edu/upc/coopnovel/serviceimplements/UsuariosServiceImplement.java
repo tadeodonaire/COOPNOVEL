@@ -61,13 +61,13 @@ public class UsuariosServiceImplement implements IUsuariosService {
     }
 
     @Override
-    public Double averagePerChapter() {
-        return uR.averagePerChapter();
+    public List<String[]> ListSuscripcionPorMes(int id) {
+        return uR.ListSuscripcionPorMes((id));
     }
 
     @Override
-    public List<Object[]> engagementPerUser() {
-        return uR.engagementPerUser();
+    public List<String[]> obtenerBibliotecaCompleta(int usuarioId) {
+        return uR.obtenerBibliotecaCompleta(usuarioId);
     }
 
 }

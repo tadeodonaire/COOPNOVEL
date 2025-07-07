@@ -44,11 +44,11 @@ public class CapitulosDTO {
         this.novelas = novelas;
     }
 
-    public Descargas getDescarga() {
+    public Descargas getDescargas() {
         return descargas;
     }
 
-    public void setDescarga(Descargas descargas) {
+    public void setDescargas(Descargas descargas) {
         this.descargas = descargas;
     }
 }

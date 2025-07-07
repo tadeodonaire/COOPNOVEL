@@ -6,7 +6,7 @@ import pe.edu.upc.coopnovel.entities.Novelas;
 
 public class NovelasBibliotecasDTO {
     private int idNovelaBiblioteca;
-    private Novelas novelas;
+    private NovelasDTO novelas;
     private Biblioteca biblioteca;
 
     public int getIdNovelaBiblioteca() {
@@ -17,11 +17,11 @@ public class NovelasBibliotecasDTO {
         this.idNovelaBiblioteca = idNovelaBiblioteca;
     }
 
-    public Novelas getNovelas() {
+    public NovelasDTO getNovelas() {
         return novelas;
     }
 
-    public void setNovelas(Novelas novelas) {
+    public void setNovelas(NovelasDTO novelas) {
         this.novelas = novelas;
     }
 

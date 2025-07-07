@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/novelas")
-@PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN','COLABORADOR','USUARIO')")
+@PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'LECTOR', 'COLABORADOR', 'AUTOR')")
 public class NovelasController {
 
     @Autowired
@@ -31,19 +31,29 @@ public class NovelasController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'AUTOR')")
     public void insertar(@RequestBody NovelasDTO dto) {
         ModelMapper m = new ModelMapper();
         Novelas n = m.map(dto, Novelas.class);
         nS.insert(n);
     }
 
+    @GetMapping("/{id}")
+    public NovelasDTO listarId(@PathVariable("id") int id) {
+        ModelMapper m = new ModelMapper();
+        NovelasDTO dto = m.map(nS.searchbyid(id), NovelasDTO.class);
+        return dto;
+    }
+
     @PutMapping
+    @PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'AUTOR')")
     public void modificar(@RequestBody NovelasDTO dto) {
         ModelMapper m = new ModelMapper();
         Novelas n = m.map(dto, Novelas.class);
         nS.update(n);
     }
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'AUTOR')")
     public void eliminar(@PathVariable("id") int id) {nS.delete(id);
     }
 

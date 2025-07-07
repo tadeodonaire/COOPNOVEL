@@ -1,8 +1,8 @@
 package pe.edu.upc.coopnovel.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.NativeQuery;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import pe.edu.upc.coopnovel.entities.Usuarios;
 
@@ -17,36 +17,34 @@ public interface IUsuariosRepository extends JpaRepository<Usuarios, Integer> {
             "FROM usuarios;",nativeQuery = true)
     public List<String[]> ListAge();
 
-
     @Query(value = "SELECT \n" +
-            "    ROUND(AVG(sub.capitulos_publicados), 2) AS promedio_capitulos_por_usuario_activo\n" +
-            "FROM (\n" +
-            "    SELECT \n" +
-            "        u.id_usuario,\n" +
-            "        COUNT(c.id_capitulo) AS capitulos_publicados\n" +
-            "    FROM usuarios u\n" +
-            "    JOIN proyectos p ON p.id_usuarios = u.id_usuario\n" +
-            "    JOIN novelas n ON n.id_proyectos = p.id_proyecto\n" +
-            "    JOIN capitulos c ON c.id_novela = n.id_novela\n" +
-            "    WHERE u.us_enable = TRUE\n" +
-            "    GROUP BY u.id_usuario\n" +
-            ") sub;", nativeQuery = true)
-    public Double averagePerChapter();
+            "    TO_CHAR(s.sus_fecha_inicio, 'YYYY-MM') AS mes,\n" +
+            "    COUNT(*) AS total_suscripciones\n" +
+            "FROM suscripciones s\n" +
+            "WHERE s.id_suscriptor = :id\n" +
+            "  AND s.sus_fecha_inicio BETWEEN '2022-01-01' AND '2024-12-31'\n" +
+            "GROUP BY TO_CHAR(s.sus_fecha_inicio, 'YYYY-MM')\n" +
+            "ORDER BY mes;\n",nativeQuery = true)
+    public List<String[]> ListSuscripcionPorMes(@Param("id") int id);
 
-    @Query(value = "SELECT \n" +
-            "        u.id_usuario,\n" +
-            "        u.us_nombre,\n" +
-            "        COUNT(DISTINCT c.id_capitulo) AS total_capitulos_publicados,\n" +
-            "        COUNT(DISTINCT cm.id_comentario) AS total_comentarios,\n" +
-            "        COUNT(DISTINCT d.id_descarga) AS total_descargas\n" +
-            "    FROM usuarios u\n" +
-            "    JOIN suscripciones s ON s.id_usuario = u.id_usuario\n" +
-            "    LEFT JOIN proyectos p ON p.id_usuarios = u.id_usuario\n" +
-            "    LEFT JOIN novelas n ON n.id_proyectos = p.id_proyecto\n" +
-            "    LEFT JOIN capitulos c ON c.id_novela = n.id_novela\n" +
-            "    LEFT JOIN comentarios cm ON cm.id_usuario = u.id_usuario\n" +
-            "    LEFT JOIN descarga d ON d.usuario_id = u.id_usuario\n" +
-            "    GROUP BY u.id_usuario, u.us_nombre\n" +
-            "    ORDER BY total_capitulos_publicados DESC", nativeQuery = true)
-    public List<Object[]> engagementPerUser();
+
+    @Query(value = """
+    SELECT 
+        nb.id_novela_biblioteca,
+        b.id_biblioteca, b.bib_nombre,
+        n.id_novela, n.nov_titulo, n.nov_resumen, n.nov_genero,
+        p.id_proyecto, p.proy_titulo, p.proy_descripcion,
+        u.id_usuario, u.us_nombre, u.us_apellido, u.username,
+        c.id_capitulo, c.cap_titulo, c.cap_contenido
+    FROM novelas_bibliotecas nb
+    JOIN biblioteca b ON nb.id_biblioteca = b.id_biblioteca
+    JOIN novelas n ON nb.id_novela = n.id_novela
+    JOIN proyectos p ON n.id_proyectos = p.id_proyecto
+    JOIN usuarios u ON p.id_usuarios = u.id_usuario
+    LEFT JOIN capitulos c ON c.id_novela = n.id_novela
+    WHERE u.id_usuario = :usuarioId
+    ORDER BY b.id_biblioteca, n.id_novela, c.id_capitulo
+    """, nativeQuery = true)
+    List<String[]> obtenerBibliotecaCompleta(@Param("usuarioId") int usuarioId);
+
 }
