@@ -62,7 +62,8 @@ public class CorreccionesIAController {
 
         for (String[] columna : filaLista) {
             CapSinCorrIADTO dto = new CapSinCorrIADTO();
-            dto.setCapTitulo(columna[0]);
+            dto.setIdCapitulo(Integer.parseInt(columna[0]));
+            dto.setCapTitulo(columna[1]);
             dtoLista.add(dto);
         }
 
@@ -76,7 +77,8 @@ public class CorreccionesIAController {
         for (String[] columna : filaLista) {
             CorrPorIDCapDTO dto = new CorrPorIDCapDTO();
             dto.setIdCapitulo(Integer.parseInt(columna[0]));
-            dto.setCorCorreccionIA(columna[1]);
+            dto.setCapContenido(columna[1]);
+            dto.setCorCorreccionIA(columna[2]);
             dtoLista.add(dto);
         }
         return dtoLista;
