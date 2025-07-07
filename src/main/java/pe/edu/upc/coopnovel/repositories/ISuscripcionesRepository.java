@@ -19,7 +19,7 @@ public interface ISuscripcionesRepository extends JpaRepository<Suscripciones, I
 
     @Query(value="SELECT u.id_usuario, u.us_nombre, u.us_apellido, COUNT(s.id_suscripcion) AS totalSuscripciones\n" +
             "FROM Suscripciones s\n" +
-            "JOIN Usuarios u ON s.id_usuario = u.id_usuario\n" +
+            "JOIN Usuarios u ON s.id_suscrito = u.id_usuario\n" +
             "GROUP BY u.id_usuario, u.us_nombre, u.us_apellido\n" +
             "HAVING COUNT(s.id_suscripcion) > 1\n" +
             "ORDER BY totalSuscripciones DESC;\n",nativeQuery=true)
