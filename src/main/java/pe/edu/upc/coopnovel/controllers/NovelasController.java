@@ -2,14 +2,19 @@ package pe.edu.upc.coopnovel.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.coopnovel.dtos.ComentariosDTO;
+import pe.edu.upc.coopnovel.dtos.ComentariosNovelaDTO;
 import pe.edu.upc.coopnovel.dtos.NombreNovelaDTO;
 import pe.edu.upc.coopnovel.dtos.NovelasDTO;
+import pe.edu.upc.coopnovel.entities.Capitulos;
 import pe.edu.upc.coopnovel.entities.NovelaFullDTO;
 import pe.edu.upc.coopnovel.entities.Novelas;
 import pe.edu.upc.coopnovel.serviceinterfaces.INovelasService;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -104,4 +109,33 @@ public class NovelasController {
         }
         return dtoLista;
     }
+
+    @GetMapping("/capitulos/novela/{id}")
+    public ResponseEntity<List<Capitulos>> listarCapitulosPorNovela(@PathVariable Long id) {
+        return ResponseEntity.ok(nS.listarPorNovela(id));
+    }
+
+    @GetMapping("/comentarios/novela/{id}")
+    public List<ComentariosNovelaDTO> listarComentariosPorNovela(@PathVariable("id") int id) {
+        List<String[]> lista = nS.listarComentariosPorNovela(id);
+        List<ComentariosNovelaDTO> dtoList = new ArrayList<>();
+
+        for (String[] fila : lista) {
+            ComentariosNovelaDTO dto = new ComentariosNovelaDTO();
+            dto.setIdComentario(Integer.parseInt(fila[0]));
+            dto.setContenido(fila[1]);
+            dto.setFecha(LocalDate.parse(fila[2]));
+            dto.setIdUsuario(Integer.parseInt(fila[3]));
+            dto.setUsername(fila[4]);
+            dto.setUsApellido(fila[5]);
+            dto.setIdCapitulo(Integer.parseInt(fila[6]));
+            dto.setCapTitulo(fila[7]);
+            dto.setIdNovela(Integer.parseInt(fila[8]));
+            dto.setNovTitulo(fila[9]);
+            dtoList.add(dto);
+        }
+
+        return dtoList;
+    }
+
 }

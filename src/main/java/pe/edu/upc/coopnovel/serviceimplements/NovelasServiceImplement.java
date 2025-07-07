@@ -2,6 +2,7 @@ package pe.edu.upc.coopnovel.serviceimplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pe.edu.upc.coopnovel.entities.Capitulos;
 import pe.edu.upc.coopnovel.entities.Novelas;
 import pe.edu.upc.coopnovel.repositories.INovelasRepository;
 import pe.edu.upc.coopnovel.serviceinterfaces.INovelasService;
@@ -40,6 +41,15 @@ public class NovelasServiceImplement implements INovelasService {
     @Override
     public List<String[]> ObtenerNovelarFULL() {
         return nR.ObtenerNovelarFULL();
+    }
+
+    public List<Capitulos> listarPorNovela(Long idNovela) {
+        return nR.findByNovelaId(idNovela);
+    }
+
+    @Override
+    public List<String[]> listarComentariosPorNovela(int idNovela) {
+        return nR.listarComentariosPorNovela(idNovela);
     }
 
 }
