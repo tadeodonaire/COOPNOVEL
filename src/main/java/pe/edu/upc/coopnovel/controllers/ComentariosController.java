@@ -17,14 +17,13 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/comentarios")
-//@PreAuthorize("hasAnyAuthority('AUTOR', 'ADMINISTRADOR','COLABORADOR','LECTOR')")
 public class ComentariosController {
     @Autowired
     IComentariosService comS;
 
     @GetMapping
     public List<ComentariosDTO> list() {
-        return comS.list().stream().map(x->{
+        return comS.list().stream().map(x -> {
             ModelMapper m = new ModelMapper();
             return m.map(x, ComentariosDTO.class);
         }).collect(Collectors.toList());
@@ -38,21 +37,20 @@ public class ComentariosController {
     }
 
     @GetMapping("/{id}")
-    public ComentariosDTO listById(@PathVariable("id") Integer id){
+    public ComentariosDTO listById(@PathVariable("id") Integer id) {
         ModelMapper m = new ModelMapper();
         ComentariosDTO comDto = m.map(comS.listById(id), ComentariosDTO.class);
         return comDto;
     }
 
     @PutMapping
-    public void update(@RequestBody ComentariosDTO comDto ) {
+    public void update(@RequestBody ComentariosDTO comDto) {
         ModelMapper m = new ModelMapper();
         Comentarios com = m.map(comDto, Comentarios.class);
         comS.update(com);
     }
 
     @DeleteMapping("/{id}")
-    //@PreAuthorize("hasAnyAuthority('AUTOR', 'ADMINISTRADOR')")
     public void delete(@PathVariable("id") int id) {
         comS.delete(id);
     }

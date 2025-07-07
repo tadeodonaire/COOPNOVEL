@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/capitulos")
-//@PreAuthorize("hasAnyAuthority('AUTOR', 'ADMINISTRADOR','COLABORADOR','LECTOR')")
 public class CapitulosController {
 
     @Autowired
@@ -43,7 +42,6 @@ public class CapitulosController {
     }
 
     @PutMapping
-    //@PreAuthorize("hasAnyAuthority('AUTOR', 'ADMINISTRADOR','COLABORADOR')")
     public void modificar(@RequestBody CapitulosDTO dto) {
         ModelMapper m = new ModelMapper();
         Capitulos c = m.map(dto, Capitulos.class);
