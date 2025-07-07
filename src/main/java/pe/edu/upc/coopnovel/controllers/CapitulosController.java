@@ -9,10 +9,7 @@ import pe.edu.upc.coopnovel.dtos.CapitulosDTO;
 import pe.edu.upc.coopnovel.dtos.CapitulosDescargadosxUsuarioDTO;
 import pe.edu.upc.coopnovel.dtos.NumeroCapituloPorNovelaDTO;
 import pe.edu.upc.coopnovel.entities.Capitulos;
-import pe.edu.upc.coopnovel.entities.Descargas;
-import pe.edu.upc.coopnovel.entities.Novelas;
 import pe.edu.upc.coopnovel.serviceinterfaces.ICapitulosService;
-import pe.edu.upc.coopnovel.serviceinterfaces.IDescargasService;
 import pe.edu.upc.coopnovel.serviceinterfaces.INovelasService;
 
 import java.util.ArrayList;
@@ -27,7 +24,6 @@ public class CapitulosController {
     @Autowired
     private ICapitulosService cS;
     private INovelasService novelaService;
-    private IDescargasService descargaService;
 
     @GetMapping
     public List<CapitulosDTO> listar() {
@@ -47,7 +43,7 @@ public class CapitulosController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMINISTRADOR','COLABORADOR')")
+    //@PreAuthorize("hasAnyAuthority('AUTOR', 'ADMINISTRADOR','COLABORADOR')")
     public void modificar(@RequestBody CapitulosDTO dto) {
         ModelMapper m = new ModelMapper();
         Capitulos c = m.map(dto, Capitulos.class);
