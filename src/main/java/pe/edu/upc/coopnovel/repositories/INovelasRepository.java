@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import pe.edu.upc.coopnovel.entities.Capitulos;
 import pe.edu.upc.coopnovel.entities.Novelas;
 
 import java.util.List;
@@ -42,4 +43,21 @@ public interface INovelasRepository extends JpaRepository <Novelas, Integer> {
             "\n" +
             "ORDER BY n.id_novela, c.id_capitulo;", nativeQuery = true)
     public List<String[]>ObtenerNovelarFULL();
+
+    @Query("SELECT c FROM Capitulos c WHERE c.novelas.idNovela = :idNovela ORDER BY c.idCapitulo")
+    List<Capitulos> findByNovelaId(@Param("idNovela") Long idNovela);
+
+    @Query(value = "SELECT com.id_comentario, com.com_contenido, com.com_fecha, " +
+            "u.id_usuario, u.username, u.us_apellido, " +
+            "c.id_capitulo, c.cap_titulo, " +
+            "n.id_novela, n.nov_titulo " +
+            "FROM comentarios com " +
+            "JOIN usuarios u ON com.id_usuario = u.id_usuario " +
+            "JOIN capitulos c ON com.id_capitulo = c.id_capitulo " +
+            "JOIN novelas n ON c.id_novela = n.id_novela " +
+            "WHERE n.id_novela = :idNovela " +
+            "ORDER BY com.com_fecha DESC",
+            nativeQuery = true)
+    List<String[]> listarComentariosPorNovela(@Param("idNovela") int idNovela);
+
 }
