@@ -35,6 +35,7 @@ public class UsuariosController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRADOR')")
     public UserSecurityDTO listarId(@PathVariable ("id") Integer id){
         ModelMapper m=new ModelMapper();
         UserSecurityDTO dto=m.map(uS.listId(id), UserSecurityDTO.class);

@@ -46,7 +46,9 @@ public class ReunionesController {
         reuService.update(reuniones);
     }
 
+
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRADOR','AUTOR')")
     public void delete(@PathVariable("id") int id) {
         reuService.delete(id);
     }

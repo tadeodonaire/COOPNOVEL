@@ -57,6 +57,7 @@ public class ComentariosController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRADOR')")
     public void delete(@PathVariable("id") int id) {
         comS.delete(id);
     }
