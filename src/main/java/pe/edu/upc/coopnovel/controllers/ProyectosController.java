@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/proyectos")
-@PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'LECTOR', 'COLABORADOR', 'AUTOR')")
+//@PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'LECTOR', 'COLABORADOR', 'AUTOR')")
 public class ProyectosController {
 
     @Autowired
@@ -31,7 +31,7 @@ public class ProyectosController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'COLABORADOR', 'AUTOR')")
+    //@PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'COLABORADOR', 'AUTOR')")
     public void insertar(@RequestBody ProyectosDTO dto) {
         ModelMapper m = new ModelMapper();
         Proyectos p = m.map(dto, Proyectos.class);
@@ -46,14 +46,14 @@ public class ProyectosController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'COLABORADOR', 'AUTOR')")
+    //@PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'COLABORADOR', 'AUTOR')")
     public void modificar(@RequestBody ProyectosDTO dto) {
         ModelMapper m = new ModelMapper();
         Proyectos p = m.map(dto, Proyectos.class);
         pS.update(p);
     }
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'COLABORADOR', 'AUTOR')")
+    //@PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'COLABORADOR', 'AUTOR')")
     public void eliminar(@PathVariable("id") int id) {
         pS.delete(id);
     }
