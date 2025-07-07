@@ -26,4 +26,7 @@ public interface IBibliotecaRepository extends JpaRepository<Biblioteca, Integer
             "ORDER BY b.bib_nombre", nativeQuery = true)
     public List<String[]> listarBibliotecasConTotalCapitulos();
 
+    @Query("FROM Biblioteca b WHERE b.usuario.idUsuario = :idUsuario")
+    List<Biblioteca> findByUsuario(@Param("idUsuario") int idUsuario);
+
 }

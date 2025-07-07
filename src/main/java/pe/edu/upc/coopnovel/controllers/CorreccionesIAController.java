@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/Correcciones")
-@PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'LECTOR', 'COLABORADOR', 'AUTOR')")
 public class CorreccionesIAController {
     @Autowired
     private ICorreccionesIAService corS;
@@ -30,7 +29,6 @@ public class CorreccionesIAController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'COLABORADOR', 'AUTOR')")
     public void insert(@RequestBody CorreccionesIADTO dto){
         ModelMapper m = new ModelMapper();
         CorreccionesIA c = m.map(dto, CorreccionesIA.class);
@@ -38,7 +36,6 @@ public class CorreccionesIAController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'COLABORADOR', 'AUTOR')")
     public void update(@RequestBody CorreccionesIADTO dto){
         ModelMapper m = new ModelMapper();
         CorreccionesIA c = m.map(dto, CorreccionesIA.class);
@@ -50,6 +47,11 @@ public class CorreccionesIAController {
         ModelMapper m = new ModelMapper();
         CorreccionesIADTO dto=m.map(corS.listId(id), CorreccionesIADTO.class);
         return dto;
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable ("id") Integer id){
+        corS.delete(id);
     }
 
     @GetMapping("/CapituloSinCorreccion")

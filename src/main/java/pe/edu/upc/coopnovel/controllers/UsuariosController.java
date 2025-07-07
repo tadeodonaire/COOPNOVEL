@@ -35,7 +35,6 @@ public class UsuariosController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('ADMINISTRADOR')")
     public UserSecurityDTO listarId(@PathVariable ("id") Integer id){
         ModelMapper m=new ModelMapper();
         UserSecurityDTO dto=m.map(uS.listId(id), UserSecurityDTO.class);
@@ -43,13 +42,11 @@ public class UsuariosController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'LECTOR', 'COLABORADOR', 'AUTOR')")
     public void delete(@PathVariable ("id") Integer id){
         uS.delete(id);
     }
 
     @PutMapping
-    @PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'LECTOR', 'COLABORADOR', 'AUTOR')")
     public void modificar(@RequestBody UserSecurityDTO dto){
         ModelMapper m=new ModelMapper();
         Usuarios u=m.map(dto, Usuarios.class);
@@ -91,29 +88,23 @@ public class UsuariosController {
 
         for (String[] columna :filas ) {
             BibliotecaFULLDTO b = new BibliotecaFULLDTO();
-            b.setIdNovelaBiblioteca(Integer.parseInt(columna[0]));
-            b.setIdBiblioteca(Integer.parseInt(columna[1]));
-            b.setBibNombre(columna[2]);
-            b.setIdNovela(Integer.parseInt(columna[3]));
-            b.setNovTitulo(columna[4]);
-            b.setNovResumen(columna[5]);
-            b.setNovGenero(columna[6]);
-            b.setIdProyecto(Integer.parseInt(columna[7]));
-            b.setProyTitulo(columna[8]);
-            b.setProyDescripcion(columna[9]);
-            b.setIdUsuario(Integer.parseInt(columna[10]));
-            b.setUsNombre(columna[11]);
-            b.setUsApellido(columna[12]);
-            b.setUsername(columna[13]);
-            // Validación segura para columna[14] (idCapitulo)
-            if (columna[14] != null && !columna[14].isBlank()) {
-                b.setIdCapitulo(Integer.parseInt(columna[14]));
-            } else {
-                b.setIdCapitulo(null); // o 0 si prefieres
-            }
+            // Índices correctos según tu SELECT en el @Query
+            b.setIdBiblioteca(columna[0] != null ? Integer.parseInt(columna[0]) : null);
+            b.setBibNombre(columna[1]);
 
-            b.setCapTitulo(columna[15] != null ? columna[15] : "");
-            b.setCapContenido(columna[16] != null ? columna[16] : "");
+            b.setIdNovela(columna[2] != null ? Integer.parseInt(columna[2]) : null);
+            b.setNovTitulo(columna[3]);
+            b.setNovResumen(columna[4]);
+            b.setNovGenero(columna[5]);
+
+            b.setIdCapitulo(columna[6] != null ? Integer.parseInt(columna[6]) : null);
+            b.setCapTitulo(columna[7] != null ? columna[7] : "");
+            b.setCapContenido(columna[8] != null ? columna[8] : "");
+
+            b.setIdUsuario(columna[9] != null ? Integer.parseInt(columna[9]) : null);
+            b.setUsNombre(columna[10]);
+            b.setUsApellido(columna[11]);
+            b.setUsername(columna[12]);
             resultado.add(b);
         }
         return resultado;

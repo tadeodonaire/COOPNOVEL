@@ -1,5 +1,6 @@
 package pe.edu.upc.coopnovel.serviceimplements;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.upc.coopnovel.entities.Suscripciones;
@@ -38,4 +39,22 @@ public class SuscripcionesServiceImplement implements ISuscripcionesService {
     public List<String[]> getUsersSubscribedMore() {
         return sR.getUsersSubscribedMore();
     }
+
+    @Override
+    public List<String[]> getUsersSubscribed() {
+        return sR.getUsersSubscribed();
+    }
+
+    @Transactional
+    @Override
+    public void eliminarPorUsuarios(int idSuscriptor, int idSuscrito) {
+        sR.deleteBySuscriptorAndSuscrito(idSuscriptor, idSuscrito);
+    }
+
+    @Override
+    public List<Integer> obtenerIdsSuscripcionesDeUsuario(int idSuscriptor) {
+        return sR.findSuscripcionesIdsBySuscriptor(idSuscriptor);
+    }
+
+
 }

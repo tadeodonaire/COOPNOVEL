@@ -9,10 +9,7 @@ import pe.edu.upc.coopnovel.dtos.CapitulosDTO;
 import pe.edu.upc.coopnovel.dtos.CapitulosDescargadosxUsuarioDTO;
 import pe.edu.upc.coopnovel.dtos.NumeroCapituloPorNovelaDTO;
 import pe.edu.upc.coopnovel.entities.Capitulos;
-import pe.edu.upc.coopnovel.entities.Descargas;
-import pe.edu.upc.coopnovel.entities.Novelas;
 import pe.edu.upc.coopnovel.serviceinterfaces.ICapitulosService;
-import pe.edu.upc.coopnovel.serviceinterfaces.IDescargasService;
 import pe.edu.upc.coopnovel.serviceinterfaces.INovelasService;
 
 import java.util.ArrayList;
@@ -21,13 +18,11 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/capitulos")
-@PreAuthorize("hasAnyAuthority('AUTOR', 'ADMINISTRADOR','COLABORADOR','LECTOR')")
 public class CapitulosController {
 
     @Autowired
     private ICapitulosService cS;
     private INovelasService novelaService;
-    private IDescargasService descargaService;
 
     @GetMapping
     public List<CapitulosDTO> listar() {
@@ -39,7 +34,7 @@ public class CapitulosController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMINISTRADOR')")
+    //@PreAuthorize("hasAnyAuthority('AUTOR', 'ADMINISTRADOR')")
     public void insertar(@RequestBody CapitulosDTO dto) {
         ModelMapper m = new ModelMapper();
         Capitulos c = m.map(dto, Capitulos.class);
@@ -47,7 +42,6 @@ public class CapitulosController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMINISTRADOR','COLABORADOR')")
     public void modificar(@RequestBody CapitulosDTO dto) {
         ModelMapper m = new ModelMapper();
         Capitulos c = m.map(dto, Capitulos.class);
@@ -61,7 +55,7 @@ public class CapitulosController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMINISTRADOR')")
+    //@PreAuthorize("hasAnyAuthority('AUTOR', 'ADMINISTRADOR')")
     public void eliminar(@PathVariable("id") int id) {
         cS.delete(id);
     }
