@@ -25,7 +25,7 @@ public class CORS implements Filter {
 
         String origin = request.getHeader("Origin");
 
-        if ("https://coopnovel.netlify.app/".equals(origin) || "http://localhost:4200".equals(origin)) {
+        if ("https://coopnovel-front.vercel.app".equals(origin) || "http://localhost:4200".equals(origin)) {
             response.setHeader("Access-Control-Allow-Methods", "DELETE, GET, OPTIONS, PATCH, POST, PUT");
             response.setHeader("Access-Control-Max-Age", "3600");
             response.setHeader("Access-Control-Allow-Credentials", "true");
