@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/capitulos")
-@PreAuthorize("hasAnyAuthority('AUTOR', 'ADMINISTRADOR','COLABORADOR','LECTOR')")
+//@PreAuthorize("hasAnyAuthority('AUTOR', 'ADMINISTRADOR','COLABORADOR','LECTOR')")
 public class CapitulosController {
 
     @Autowired
@@ -35,7 +35,7 @@ public class CapitulosController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMINISTRADOR')")
+    //@PreAuthorize("hasAnyAuthority('AUTOR', 'ADMINISTRADOR')")
     public void insertar(@RequestBody CapitulosDTO dto) {
         ModelMapper m = new ModelMapper();
         Capitulos c = m.map(dto, Capitulos.class);
@@ -57,7 +57,7 @@ public class CapitulosController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMINISTRADOR')")
+    //@PreAuthorize("hasAnyAuthority('AUTOR', 'ADMINISTRADOR')")
     public void eliminar(@PathVariable("id") int id) {
         cS.delete(id);
     }

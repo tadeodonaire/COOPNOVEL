@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/comentarios")
-@PreAuthorize("hasAnyAuthority('AUTOR', 'ADMINISTRADOR','COLABORADOR','LECTOR')")
+//@PreAuthorize("hasAnyAuthority('AUTOR', 'ADMINISTRADOR','COLABORADOR','LECTOR')")
 public class ComentariosController {
     @Autowired
     IComentariosService comS;
@@ -58,7 +58,7 @@ public class ComentariosController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMINISTRADOR')")
+    //@PreAuthorize("hasAnyAuthority('AUTOR', 'ADMINISTRADOR')")
     public void delete(@PathVariable("id") int id) {
         comS.delete(id);
     }
