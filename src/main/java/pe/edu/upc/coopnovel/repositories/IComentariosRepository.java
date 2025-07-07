@@ -3,6 +3,7 @@ package pe.edu.upc.coopnovel.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import pe.edu.upc.coopnovel.dtos.ComentariosDTO;
 import pe.edu.upc.coopnovel.entities.Comentarios;
 
 import java.util.List;
@@ -23,4 +24,6 @@ public interface IComentariosRepository extends JpaRepository<Comentarios, Integ
             "ORDER BY totalComentarios DESC\n" +
             "LIMIT 3\n", nativeQuery = true)
     public List<String[]> getTopThreeComentators();
+
+    List<Comentarios> findByCapituloIdCapituloOrderByComFechaDesc(Integer idCapitulo);
 }
