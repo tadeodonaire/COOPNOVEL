@@ -32,7 +32,7 @@ public class CORS implements Filter {
             response.setHeader("Access-Control-Allow-Headers",
                     "x-requested-with, authorization, Content-Type, Authorization, credential, X-XSRF-TOKEN");
         }
-        response.setHeader("Access-Control-Allow-Origin", "https://securityg06.netlify.app");
+        response.setHeader("Access-Control-Allow-Origin", "https://coopnovel-front.vercel.app");
         response.setHeader("Access-Control-Allow-Credentials", "true");
 
         response.setHeader("Access-Control-Allow-Origin", "*");
