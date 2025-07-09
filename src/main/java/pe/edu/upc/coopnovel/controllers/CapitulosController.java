@@ -24,7 +24,6 @@ public class CapitulosController {
 
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN','COLABORADOR','LECTOR')")
     public List<CapitulosDTO> listar() {
 
         return cS.list().stream().map(x -> {
@@ -34,7 +33,6 @@ public class CapitulosController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN')")
     public void insertar(@RequestBody CapitulosDTO dto) {
         ModelMapper m = new ModelMapper();
         Capitulos c = m.map(dto, Capitulos.class);
@@ -42,14 +40,12 @@ public class CapitulosController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN','COLABORADOR')")
     public void modificar(@RequestBody CapitulosDTO dto) {
         ModelMapper m = new ModelMapper();
         Capitulos c = m.map(dto, Capitulos.class);
         cS.update(c);
     }
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN','COLABORADOR')")
     public CapitulosDTO listarId(@PathVariable ("id") Integer id){
         ModelMapper m=new ModelMapper();
         CapitulosDTO dto=m.map(cS.listId(id), CapitulosDTO.class);
@@ -57,14 +53,12 @@ public class CapitulosController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN')")
     public void eliminar(@PathVariable("id") int id) {
         cS.delete(id);
     }
 
 
     @GetMapping("/cantidad-capitulo")
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN','COLABORADOR','LECTOR')")
     public List<NumeroCapituloPorNovelaDTO> cantidadCapitulo(@RequestParam String titulo) {
         List<NumeroCapituloPorNovelaDTO> dtoLista = new ArrayList<>();
         List<String[]> filaLista = cS.findCapituloByName(titulo);
@@ -80,7 +74,6 @@ public class CapitulosController {
     }
 
     @GetMapping("/capitulos-descargados")
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public List<CapitulosDescargadosxUsuarioDTO> cantidadCapituloxdescargados() {
         List<CapitulosDescargadosxUsuarioDTO> dtoLista = new ArrayList<>();
         List<String[]> filaLista = cS.quantityCapitulosbyUsuario();
