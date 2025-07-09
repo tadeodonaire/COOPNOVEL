@@ -25,7 +25,7 @@ public class BibliotecaServiceImplement implements IBibliotecaService {
 
     @Override
     public Biblioteca listById(int id) {
-        return bR.findById(id).orElse(null);
+        return bR.findById(id).orElse(new Biblioteca());
     }
 
     @Override
@@ -46,5 +46,10 @@ public class BibliotecaServiceImplement implements IBibliotecaService {
     @Override
     public List<String[]> listarBibliotecasConTotalCapitulos() {
         return bR.listarBibliotecasConTotalCapitulos();
+    }
+
+    @Override
+    public List<Biblioteca> findByUsuario(int idUsuario) {
+        return bR.findByUsuario(idUsuario);
     }
 }

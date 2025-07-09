@@ -1,6 +1,6 @@
 package pe.edu.upc.coopnovel.dtos;
 
-import pe.edu.upc.coopnovel.entities.Usuarios;
+
 
 import java.time.LocalDate;
 
@@ -10,7 +10,8 @@ public class SuscripcionesDTO {
 
     private LocalDate susFechaInicio;
 
-    private Usuarios usuarios;
+    private UserSecurityDTO suscriptor;
+    private UserSecurityDTO suscrito;
 
     public int getIdSuscripcion() {
         return idSuscripcion;
@@ -28,11 +29,19 @@ public class SuscripcionesDTO {
         this.susFechaInicio = susFechaInicio;
     }
 
-    public Usuarios getUsuarios() {
-        return usuarios;
+    public UserSecurityDTO getSuscriptor() {
+        return suscriptor;
     }
 
-    public void setUsuarios(Usuarios usuarios) {
-        this.usuarios = usuarios;
+    public void setSuscriptor(UserSecurityDTO suscriptor) {
+        this.suscriptor = suscriptor;
+    }
+
+    public UserSecurityDTO getSuscrito() {
+        return suscrito;
+    }
+
+    public void setSuscrito(UserSecurityDTO suscrito) {
+        this.suscrito = suscrito;
     }
 }

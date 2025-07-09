@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/bibliotecas")
-@PreAuthorize("hasAnyAuthority('ADMIN','COLABORADOR','LECTOR')")
 public class BibliotecaController {
 
     @Autowired
@@ -81,4 +80,9 @@ public class BibliotecaController {
         }
         return dtoLista;
     }
+    @GetMapping("/usuario/{id}")
+    public List<Biblioteca> listarPorUsuario(@PathVariable("id") int idUsuario) {
+        return bibS.findByUsuario(idUsuario);
+    }
+
 }

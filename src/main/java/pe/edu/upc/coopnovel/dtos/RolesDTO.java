@@ -5,7 +5,6 @@ import pe.edu.upc.coopnovel.entities.Usuarios;
 public class RolesDTO {
     private Long id;
     private String rol;
-    private Usuarios user;
 
     public Long getId() {
         return id;
@@ -23,11 +22,4 @@ public class RolesDTO {
         this.rol = rol;
     }
 
-    public Usuarios getUser() {
-        return user;
-    }
-
-    public void setUser(Usuarios user) {
-        this.user = user;
-    }
 }

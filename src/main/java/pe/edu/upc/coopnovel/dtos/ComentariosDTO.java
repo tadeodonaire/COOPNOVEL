@@ -9,7 +9,7 @@ public class ComentariosDTO {
     private int idComentario;
     private String comContenido;
     private LocalDate comFecha;
-    private Usuarios usuario;
+    private UserSecurityDTO usuario;
     private Capitulos capitulo;
 
     public int getIdComentario() {
@@ -36,11 +36,11 @@ public class ComentariosDTO {
         this.comFecha = comFecha;
     }
 
-    public Usuarios getUsuario() {
+    public UserSecurityDTO getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuarios usuario) {
+    public void setUsuario(UserSecurityDTO usuario) {
         this.usuario = usuario;
     }
 

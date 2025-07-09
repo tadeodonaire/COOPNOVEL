@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/reuniones")
-@PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN','COLABORADOR','LECTOR')")
 public class ReunionesController {
     @Autowired
     IReunionesService reuService;
@@ -47,7 +46,9 @@ public class ReunionesController {
         reuService.update(reuniones);
     }
 
+
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRADOR','AUTOR')")
     public void delete(@PathVariable("id") int id) {
         reuService.delete(id);
     }

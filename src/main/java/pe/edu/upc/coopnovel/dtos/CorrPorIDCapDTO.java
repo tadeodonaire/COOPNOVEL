@@ -2,6 +2,7 @@ package pe.edu.upc.coopnovel.dtos;
 
 public class CorrPorIDCapDTO {
     private int idCapitulo;
+    private String capContenido;
     private String corCorreccionIA;
 
     public int getIdCapitulo() {return idCapitulo;}
@@ -16,5 +17,13 @@ public class CorrPorIDCapDTO {
 
     public void setCorCorreccionIA(String corCorreccionIA) {
         this.corCorreccionIA = corCorreccionIA;
+    }
+
+    public String getCapContenido() {
+        return capContenido;
+    }
+
+    public void setCapContenido(String capContenido) {
+        this.capContenido = capContenido;
     }
 }

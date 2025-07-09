@@ -12,4 +12,9 @@ public interface ISuscripcionesService {
     public void delete(int id);
     public List<String[]>obtenerSuscripcionesxId(int idUsuario);
     public List<String[]> getUsersSubscribedMore();
+    public List<String[]> getUsersSubscribed();
+    public void eliminarPorUsuarios(int idSuscriptor, int idSuscrito);
+    List<Integer> obtenerIdsSuscripcionesDeUsuario(int idSuscriptor);
+
+
 }

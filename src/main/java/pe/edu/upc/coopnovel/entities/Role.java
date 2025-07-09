@@ -1,12 +1,11 @@
 package pe.edu.upc.coopnovel.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 
 @Entity
-@Table(name = "roles", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "rol"})})
+@Table(name = "roles", uniqueConstraints = {@UniqueConstraint(columnNames = {"rol"})})
 public class Role implements Serializable {
 
     @Id
@@ -15,12 +14,6 @@ public class Role implements Serializable {
 
     @Column(nullable = false)
     private String rol;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    @JsonIgnore
-    private Usuarios user;
-
 
 
     public Long getId() {
@@ -39,11 +32,4 @@ public class Role implements Serializable {
         this.rol = rol;
     }
 
-    public Usuarios getUser() {
-        return user;
-    }
-
-    public void setUser(Usuarios user) {
-        this.user = user;
-    }
 }

@@ -8,6 +8,7 @@ public interface IProyectosService {
 
     public List<Proyectos> list();
     public void insert(Proyectos p);
+    public Proyectos searchbyId(int id);
     public void update(Proyectos p);
     public void delete(int id);
 

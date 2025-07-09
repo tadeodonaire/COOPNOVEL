@@ -6,6 +6,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.coopnovel.dtos.RepeatUsersDTO;
 import pe.edu.upc.coopnovel.dtos.SuscripcionesDTO;
+import pe.edu.upc.coopnovel.dtos.SuscripcionesQueryDTO;
 import pe.edu.upc.coopnovel.dtos.SuscripcionesxUsuarioDTO;
 import pe.edu.upc.coopnovel.entities.Suscripciones;
 import pe.edu.upc.coopnovel.serviceinterfaces.ISuscripcionesService;
@@ -17,14 +18,12 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/suscripciones")
-@PreAuthorize("hasAnyAuthority('ADMIN','COLABORADOR','LECTOR')")
 public class SuscripcionesController {
 
     @Autowired
     private ISuscripcionesService sS;
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public List<SuscripcionesDTO> listar(){
 
         return sS.list().stream().map(x->{
@@ -71,8 +70,13 @@ public class SuscripcionesController {
         sS.delete(id);
     }
 
+    @DeleteMapping("/suscriptor/{idSuscriptor}/suscrito/{idSuscrito}")
+    public void eliminarPorUsuarios(@PathVariable int idSuscriptor, @PathVariable int idSuscrito) {
+        sS.eliminarPorUsuarios(idSuscriptor, idSuscrito);
+    }
+
+
     @GetMapping("/usuarios-suscritos")
-    @PreAuthorize("hasAnyAuthority('AUTOR', 'ADMIN')")
     public List<RepeatUsersDTO> getUsersSubscribedMore() {
         List<RepeatUsersDTO> dtoLista = new ArrayList<>();
         List<String[]> filaLista = sS.getUsersSubscribedMore();
@@ -86,4 +90,25 @@ public class SuscripcionesController {
         }
         return dtoLista;
     }
+    @GetMapping("/cantidad-suscripciones")
+    public List<SuscripcionesQueryDTO> getUsersSubscribed() {
+        List<SuscripcionesQueryDTO> dtoLista = new ArrayList<>();
+        List<String[]> filaLista = sS.getUsersSubscribed();
+        for (String[] columna : filaLista) {
+            SuscripcionesQueryDTO dto = new SuscripcionesQueryDTO();
+            dto.setIdUsuario(Integer.parseInt(columna[0]));
+            dto.setNombre(columna[1]);
+            dto.setApellido(columna[2]);
+            dto.setSuscriptores(Integer.parseInt(columna[3]));
+            dto.setNovelas(columna[4]);
+            dtoLista.add(dto);
+        }
+        return dtoLista;
+    }
+
+    @GetMapping("/mis-suscripciones/{idSuscriptor}")
+    public List<Integer> obtenerMisSuscripciones(@PathVariable int idSuscriptor) {
+        return sS.obtenerIdsSuscripcionesDeUsuario(idSuscriptor);
+    }
+
 }

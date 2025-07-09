@@ -8,7 +8,7 @@ public class CorreccionesIA {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idCorreccionIA;
 
-    @Column(name = "corCorrecionIA", length = 1000000, nullable = false)
+    @Column(name = "corCorrecionIA", length = 1000000000, nullable = false)
     private String corCorreccionIA;
 
     @OneToOne

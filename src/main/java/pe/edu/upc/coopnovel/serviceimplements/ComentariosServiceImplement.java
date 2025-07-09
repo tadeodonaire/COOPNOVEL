@@ -1,7 +1,9 @@
 package pe.edu.upc.coopnovel.serviceimplements;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pe.edu.upc.coopnovel.dtos.ComentariosDTO;
 import pe.edu.upc.coopnovel.entities.Comentarios;
 import pe.edu.upc.coopnovel.repositories.IComentariosRepository;
 import pe.edu.upc.coopnovel.serviceinterfaces.IComentariosService;
@@ -19,8 +21,8 @@ public class ComentariosServiceImplement implements IComentariosService {
     }
 
     @Override
-    public void insert(Comentarios comentario) {
-        comR.save(comentario);
+    public Comentarios insert(Comentarios comentario) {
+        return comR.save(comentario); // importante: retorna el guardado
     }
 
     @Override
@@ -42,7 +44,18 @@ public class ComentariosServiceImplement implements IComentariosService {
     public List<String[]> findCantidadComentarios() { return comR.findCantidadComentarios(); }
 
     @Override
-    public List<String[]> getTopTenComentators() {
-        return comR.getTopTenComentators();
+    public List<String[]> getTopThreeComentators() {
+        return comR.getTopThreeComentators();
     }
+
+    // ComentariosServiceImplement.java
+    @Override
+    public List<ComentariosDTO> findByCapituloIdCapituloOrderByComFechaDesc(Integer idCapitulo) {
+        List<Comentarios> comentarios = comR.findByCapituloIdCapituloOrderByComFechaDesc(idCapitulo);
+        ModelMapper m = new ModelMapper();
+        return comentarios.stream()
+                .map(c -> m.map(c, ComentariosDTO.class))
+                .toList();
+    }
+
 }

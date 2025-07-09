@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/novelas-bibliotecas")
-@PreAuthorize("hasAnyAuthority('ADMIN','COLABORADOR','LECTOR')")
 public class NovelasBibliotecasController {
 
     @Autowired
@@ -40,6 +39,13 @@ public class NovelasBibliotecasController {
         ModelMapper m = new ModelMapper();
         NovelasBibliotecas nb = m.map(nbdto, NovelasBibliotecas.class);
         nbS.update(nb);
+    }
+
+    @GetMapping("/{id}")
+    public NovelasBibliotecasDTO listarId(@PathVariable("id") int id) {
+        ModelMapper m = new ModelMapper();
+        NovelasBibliotecasDTO dto = m.map(nbS.searchbyid(id), NovelasBibliotecasDTO.class);
+        return dto;
     }
 
     @DeleteMapping("/{id}")

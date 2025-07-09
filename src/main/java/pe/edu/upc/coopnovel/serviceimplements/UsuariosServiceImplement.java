@@ -50,6 +50,7 @@ public class UsuariosServiceImplement implements IUsuariosService {
         usuarioExistente.setUsCorreo(usuarios.getUsCorreo());
         usuarioExistente.setUsername(usuarios.getUsername());
         usuarioExistente.setUsEnable(usuarios.getUsEnable());
+        usuarioExistente.setRole(usuarios.getRole());
 
         uR.save(usuarioExistente);
     }
@@ -58,6 +59,16 @@ public class UsuariosServiceImplement implements IUsuariosService {
     @Override
     public List<String[]> ListAge() {
         return uR.ListAge();
+    }
+
+    @Override
+    public List<String[]> ListSuscripcionPorMes(int id) {
+        return uR.ListSuscripcionPorMes((id));
+    }
+
+    @Override
+    public List<String[]> obtenerBibliotecaCompleta(int usuarioId) {
+        return uR.obtenerBibliotecaCompleta(usuarioId);
     }
 
 }

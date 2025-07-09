@@ -17,22 +17,19 @@ public class Capitulos {
     private String capContenido;
 
     @ManyToOne
-    @JoinColumn(name = "idNovela")
+    @JoinColumn(name = "idNovela",nullable = false)
     private Novelas novelas;
 
-    @ManyToOne
-    @JoinColumn(name = "idDescarga")
-    private Descargas descargas;
+
 
     public Capitulos() {
     }
 
-    public Capitulos(int idCapitulo, String capTitulo, String capContenido, Novelas novelas, Descargas descargas) {
+    public Capitulos(int idCapitulo, String capTitulo, String capContenido, Novelas novelas) {
         this.idCapitulo = idCapitulo;
         this.capTitulo = capTitulo;
         this.capContenido = capContenido;
         this.novelas = novelas;
-        this.descargas = descargas;
     }
 
     public int getIdCapitulo() {
@@ -67,11 +64,4 @@ public class Capitulos {
         this.novelas = novelas;
     }
 
-    public Descargas getDescarga() {
-        return descargas;
-    }
-
-    public void setDescarga(Descargas descargas) {
-        this.descargas = descargas;
-    }
 }
